@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using HillsboroughEducation.Filters;
 using HillsboroughEducation.Models;
+using System.Net.Mail;
+using System.Web.UI;
 
 namespace HillsboroughEducation.Controllers
 {
@@ -57,6 +59,58 @@ namespace HillsboroughEducation.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // 
+        // GET: /Account/Forgot
+
+        [AllowAnonymous]
+        public ActionResult Forgot()
+        {
+            return View();
+        }
+
+        //
+        // GET: /Account/Forgot
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Forgot(ForgotModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+                mail.To.Add(model.Email);
+                mail.From = new MailAddress("kevin.zhaofa.lin@tsgforce.com", "Do not reply", System.Text.Encoding.UTF8);
+                mail.Subject = "Recover Password";
+                mail.SubjectEncoding = System.Text.Encoding.UTF8;
+                mail.Body = "Follow this link to recoved password.";
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                mail.IsBodyHtml = true;
+                mail.Priority = MailPriority.High;
+                SmtpClient client = new SmtpClient();
+                client.Credentials = new System.Net.NetworkCredential("kevin.zhaofa.lin@tsgforce.com", "forceforgood12");
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                try
+                {
+                    client.Send(mail);
+                }
+                catch (Exception ex)
+                {
+                    Exception ex2 = ex;
+                    string errorMessage = string.Empty;
+                    while (ex2 != null)
+                    {
+                        errorMessage += ex2.ToString();
+                        ex2 = ex2.InnerException;
+                    }
+                }
+            }
+
+            return View(model);
+        }
+
         //
         // GET: /Account/Register
 
@@ -79,10 +133,9 @@ namespace HillsboroughEducation.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.FirstName, model.MiddleName, model.LastName });
                     
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 catch (MembershipCreateUserException e)
                 {

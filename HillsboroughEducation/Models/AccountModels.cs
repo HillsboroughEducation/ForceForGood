@@ -52,7 +52,7 @@ namespace HillsboroughEducation.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -70,7 +70,7 @@ namespace HillsboroughEducation.Models
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Middle Name")]
+        [Display(Name = "Middle Name (Optional)")]
         public string MiddleName { get; set; }
 
         [Required]
@@ -78,8 +78,7 @@ namespace HillsboroughEducation.Models
         public string LastName { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "User name")]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
         [Required]
@@ -92,5 +91,20 @@ namespace HillsboroughEducation.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class ForgotModel
+    {
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set;}
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set;}
+
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
     }
 }
