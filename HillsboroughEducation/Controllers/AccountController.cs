@@ -59,7 +59,7 @@ namespace HillsboroughEducation.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         // 
@@ -72,7 +72,7 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
-        // GET: /Account/Forgot
+        // POST: /Account/Forgot
 
         [HttpPost]
         [AllowAnonymous]
@@ -81,18 +81,66 @@ namespace HillsboroughEducation.Controllers
         {
             if (ModelState.IsValid)
             {
-                email.sendEmail(model.Email, "Recover Password", "Follow this link to recoved password.");
+                MembershipUser user;
+                using (var context = new UsersContext())
+                {
+                    var foundUserName = (from u in context.UserProfiles
+                                         where u.UserName == model.Email
+                                         select u.UserName).FirstOrDefault();
+                    if (foundUserName != null)
+                    {
+                        user = Membership.GetUser(foundUserName.ToString());
+                    }
+                    else
+                    {
+                        user = null;
+                    }
+                }
+                if (user != null)
+                {
+                    // Generate password token that will be used in the email link to authenticate user
+                    var token = WebSecurity.GeneratePasswordResetToken(user.UserName);
+                    // Generate the html link sent via email
+                    string resetLink = "<a href='"
+                    + Url.Action("ResetPassword", "Account", new { rt = token }, "http")
+                    + "'>Reset Password Link</a>";
+                    email.sendEmail(model.Email, "Recover Password", "Follow this link to reset password", resetLink);
+                }
             }
+            return RedirectToAction("Login", "Account");
+        }
 
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string rt)
+        {
+            ResetPasswordModel model = new ResetPasswordModel();
+            model.ReturnToken = rt;
             return View(model);
         }
 
         //
-        // GET: /Account/RecoverPassword
+        // POST: /Account/ResetPassword
+        [HttpPost]
         [AllowAnonymous]
-        public ActionResult RecoverPassword()
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                bool resetResponse = WebSecurity.ResetPassword(model.ReturnToken, model.Password);
+
+                if (resetResponse)
+                {
+                    ViewBag.Message = "Password Successfully Changed.";
+                }
+                else
+                {
+                    ViewBag.Message = "Password change failed.";
+                }
+            }
+            return View(model);
         }
 
         //
@@ -118,7 +166,7 @@ namespace HillsboroughEducation.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.FirstName, model.MiddleName, model.LastName });
-                    email.sendEmail(model.UserName, "Account Registeration", "Your account " + model.UserName + "has been successfully registered.  Welcome to the Hillsborough Education Foundation.");
+                    email.sendEmail(model.UserName, "Account Registeration", "Your account " + model.UserName + "has been successfully registered.  Welcome to the Hillsborough Education Foundation.", null);
                     return RedirectToAction("Login", "Account");
                 }
                 catch (MembershipCreateUserException e)

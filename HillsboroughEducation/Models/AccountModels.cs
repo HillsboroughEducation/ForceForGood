@@ -107,4 +107,20 @@ namespace HillsboroughEducation.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class ResetPasswordModel
+    {
+        [Required]
+        [Display(Name = "New Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set;}
+
+        [Required]
+        [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string ReturnToken { get; set; }
+    }
 }

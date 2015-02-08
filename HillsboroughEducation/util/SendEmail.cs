@@ -8,8 +8,13 @@ namespace HillsboroughEducation.util
 {
     public class SendEmail
     {
-        public void sendEmail(String emailAddress, String subject, String body)
+        public void sendEmail(String emailAddress, String subject, String body, String resetLink)
         {
+            if (resetLink != null)
+            {
+                body = body + ": " + resetLink;
+            }
+         
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
             mail.To.Add(emailAddress);
             mail.From = new MailAddress("kevin.zhaofa.lin@tsgforce.com", "Do not reply", System.Text.Encoding.UTF8);
@@ -24,6 +29,7 @@ namespace HillsboroughEducation.util
             client.Port = 587;
             client.Host = "smtp.gmail.com";
             client.EnableSsl = true;
+
             try
             {
                 client.Send(mail);
