@@ -166,7 +166,7 @@ namespace HillsboroughEducation.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.FirstName, model.MiddleName, model.LastName });
-                    email.sendEmail(model.UserName, "Account Registeration", "Your account " + model.UserName + "has been successfully registered.  Welcome to the Hillsborough Education Foundation.", null);
+                    email.sendEmail(model.UserName, "Account Registeration", "Your account " + model.UserName + " has been successfully registered.  Welcome to the Hillsborough Education Foundation.", null);
                     return RedirectToAction("Login", "Account");
                 }
                 catch (MembershipCreateUserException e)
