@@ -16,6 +16,7 @@ namespace HillsboroughEducation.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<StudentModel> StudentProfiles { get; set; }
     }
 
     [Table("UserProfile")]
