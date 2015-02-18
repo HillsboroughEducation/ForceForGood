@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HillsboroughEducation.Models.StudentModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Student</title>
+</head>
+<body>
+    @helper sortLink(string name, int id) 
+    {
+        <a href="@Url.Action("Student", "Admin", new {sortby = id, isasc = (id == ViewBag.sortBy ? !@ViewBag.isAsc : @ViewBag.isAsc).ToString().ToLower() })">@name</a>
+        if (id == ViewBag.sortBy)
+        {
+            <span class="arrow @(ViewBag.isAsc ? "up" : "down" )"></span>
+        }
+    }
+    <h2>Manage Students</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.DisplayName("Search by: First Name, Last Name, Middle Name, Student Number, or UserName")
+        <p>
+            @Html.TextBox("SearchString")
+        </p>
+        <input type="submit" value="Submit" /> 
+    } 
+    <table>
+        @* header *@
+        <tr>
+            <th>@sortLink("Last Name", 1)</th>
+            <th>@sortLink("First Name", 2)</th>
+            <th>@sortLink("Student #", 3)</th>
+            <th>@sortLink("Username", 4)</th>
+            <th>@sortLink("D.O.B", 5)</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

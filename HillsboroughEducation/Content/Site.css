@@ -586,6 +586,23 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+.arrow {
+	display: inline-block;
+    height: 16px;    
+    vertical-align: middle;
+    width: 13px;
+}
+
+.arrow.up 
+{
+    background-image: url('Images/arrow-up.png');	
+}
+
+.arrow.down
+{
+    background-image: url('Images/arrow-down.png');	
+}
+
 
 /********************
 *   Mobile Styles   *
