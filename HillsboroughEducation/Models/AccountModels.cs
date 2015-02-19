@@ -78,7 +78,9 @@ namespace HillsboroughEducation.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage= "Please enter Email Address ")]
+      //  [RegularExpression()]
+        [EmailAddress(ErrorMessage= "Please Enter Valid Email Address")]
         [Display(Name = "Email")]
         public string UserName { get; set; }
 
