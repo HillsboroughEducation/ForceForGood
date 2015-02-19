@@ -7,32 +7,34 @@
     <title>Student</title>
 </head>
 <body>
-    @helper sortLink(string name, int id) 
+    @using (Html.BeginForm())
     {
-        <a href="@Url.Action("Student", "Admin", new {sortby = id, isasc = (id == ViewBag.sortBy ? !@ViewBag.isAsc : @ViewBag.isAsc).ToString().ToLower() })">@name</a>
-        if (id == ViewBag.sortBy)
-        {
-            <span class="arrow @(ViewBag.isAsc ? "up" : "down" )"></span>
-        }
-    }
     <p>
-        @using (Html.BeginForm())
-        {
-        <p>
-            Title: @Html.TextBox("SearchString") <br />
-            <input type="submit" value="Submit" />
-        </p>
-        }
-        </p>
+        Title: @Html.TextBox("SearchString") <br />
+        <input type="submit" value="Submit" />
+    </p>
+    }
     <table>
-        @* header *@
         <tr>
-            <th>@sortLink("Last Name", 1)</th>
-            <th>@sortLink("First Name", 2)</th>
-            <th>@sortLink("Student #", 3)</th>
-            <th>@sortLink("Username", 4)</th>
-            <th>@sortLink("D.O.B", 5)</th>
-            <th>@sortLink("Academic Year", 6)</th>
+            <th>
+                @Html.ActionLink("Last Name", "Student", new { sortBy = 1 })
+            </th>
+            <th>
+                @Html.ActionLink("First Name", "Student", new { sortBy = 2 })
+            </th>
+            <th>
+                @Html.ActionLink("Student #", "Student", new { sortBy = 3 })
+            </th>
+            <th>
+                @Html.ActionLink("Username", "Student", new { sortBy = 4 })
+            </th>
+            <th>
+                @Html.ActionLink("D.O.B", "Student", new { sortBy = 5 })
+            </th>
+            <th>
+                @Html.ActionLink("Academic Year", "Student", new { sortBy = 6 })
+            </th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
