@@ -21,11 +21,12 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Admin/Student
+        [HttpGet]
         public ActionResult Student(int sortBy = 1, bool isAsc = true)
         {
             IEnumerable<StudentModel> students;
             var studentlist = db.StudentProfiles.ToList();
-
+            
             #region Sorting
             switch (sortBy)
             {
@@ -49,6 +50,10 @@ namespace HillsboroughEducation.Controllers
                     students = isAsc ? studentlist.OrderBy(s => s.BirthDate) : studentlist.OrderByDescending(s => s.BirthDate);
                     break;
 
+                case 6:
+                    students = isAsc ? studentlist.OrderBy(s => s.AcademicYear) : studentlist.OrderByDescending(s => s.AcademicYear);
+                    break;
+
                 default:
                     students = isAsc ? studentlist.OrderBy(s => s.LastName) : studentlist.OrderByDescending(s => s.LastName);
                     break;
@@ -64,7 +69,7 @@ namespace HillsboroughEducation.Controllers
         //
         // POST: /Admin/Student
         [HttpPost]
-        public ActionResult Student(string sortOrder, string searchString)
+        public ActionResult Student(string searchString)
         {
             var students = from s in db.StudentProfiles select s;
             students = students.Where(s => (s.UserName.Contains(searchString)) || 

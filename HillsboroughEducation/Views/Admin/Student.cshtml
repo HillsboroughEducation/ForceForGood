@@ -15,15 +15,15 @@
             <span class="arrow @(ViewBag.isAsc ? "up" : "down" )"></span>
         }
     }
-    <h2>Manage Students</h2>
-    @using (Html.BeginForm())
-    {
-        @Html.DisplayName("Search by: First Name, Last Name, Middle Name, Student Number, or UserName")
+    <p>
+        @using (Html.BeginForm())
+        {
         <p>
-            @Html.TextBox("SearchString")
+            Title: @Html.TextBox("SearchString") <br />
+            <input type="submit" value="Submit" />
         </p>
-        <input type="submit" value="Submit" /> 
-    } 
+        }
+        </p>
     <table>
         @* header *@
         <tr>
@@ -32,6 +32,7 @@
             <th>@sortLink("Student #", 3)</th>
             <th>@sortLink("Username", 4)</th>
             <th>@sortLink("D.O.B", 5)</th>
+            <th>@sortLink("Academic Year", 6)</th>
         </tr>
 
         @foreach (var item in Model)
@@ -51,6 +52,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcademicYear)
                 </td>
             </tr>
         }

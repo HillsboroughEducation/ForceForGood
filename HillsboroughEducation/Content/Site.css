@@ -595,7 +595,8 @@ tr.pager td {
 
 .arrow.up 
 {
-    background-image: url('Images/arrow-up.png');	
+    background-color: aqua;
+    background-image: url('/Images/arrow-up.png');	
 }
 
 .arrow.down
