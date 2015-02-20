@@ -21,35 +21,72 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Admin/Student
-        public ActionResult Student(int sortBy = 1)
+        public ActionResult Student(string sortOrder, string searchString)
         {
+            ViewBag.LastNameSortParam = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstName" ? "firstName_desc" : "FirstName";
+            ViewBag.StudentNumberSortParam = sortOrder == "StudentNumber" ? "studentNumber_desc" : "StudentNumber";
+            ViewBag.UserNameSortParam = sortOrder == "UserName" ? "userName_desc" : "UserName";
+            ViewBag.BirthDateSortParam = sortOrder == "BirthDate" ? "birthDate_desc" : "BirthDate";
+            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
             var students = from s in db.StudentProfiles
                            select s;
-            #region Sorting
-            switch (sortBy)
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                case 1:
-                    students = students.OrderBy(s => s.LastName);
+                students = students.Where(s => (s.UserName.Contains(searchString)) ||
+                                            (s.LastName.Contains(searchString)) ||
+                                            (s.MiddleName.Contains(searchString)) ||
+                                            (s.FirstName.Contains(searchString)) ||
+                                            (s.StudentNumber.Contains(searchString)) ||
+                                            (s.AcademicYear.Contains(searchString))).OrderBy(s => s.LastName);
+            }
+
+            #region Sorting
+            switch (sortOrder)
+            {
+                case "lastName_desc":
+                    students = students.OrderByDescending(s => s.LastName);
                     break;
 
-                case 2:
+                case "FirstName":
                     students = students.OrderBy(s => s.FirstName);
                     break;
 
-                case 3:
+                case "firstName_desc":
+                    students = students.OrderByDescending(s => s.FirstName);
+                    break;
+
+                case "StudentNumber":
                     students = students.OrderBy(s => s.StudentNumber);
                     break;
 
-                case 4:
+                case "studenNumber_desc":
+                    students = students.OrderByDescending(s => s.StudentNumber);
+                    break;
+
+                case "UserName":
                     students = students.OrderBy(s => s.UserName);
                     break;
 
-                case 5:
+                case "userName_desc":
+                    students = students.OrderByDescending(s => s.UserName);
+                    break;
+
+                case "BirthDate":
                     students = students.OrderBy(s => s.BirthDate);
                     break;
 
-                case 6:
+                case "birthDate_desc":
+                    students = students.OrderByDescending(s => s.BirthDate);
+                    break;
+
+                case "AcademicYear":
                     students = students.OrderBy(s => s.AcademicYear);
+                    break;
+
+                case "academicYear_desc":
+                    students = students.OrderByDescending(s => s.AcademicYear);
                     break;
 
                 default:
@@ -58,26 +95,7 @@ namespace HillsboroughEducation.Controllers
             }
             #endregion
 
-            return View(students);
-        }
-
-        //
-        // POST: /Admin/Student
-        [HttpPost]
-        public ActionResult Student(string searchString)
-        {
-
-            var students = from s in db.StudentProfiles
-                           select s;
-
-            students = students.Where(s => (s.UserName.Contains(searchString)) ||
-                                            (s.LastName.Contains(searchString)) ||
-                                            (s.MiddleName.Contains(searchString)) ||
-                                            (s.FirstName.Contains(searchString)) ||
-                                            (s.StudentNumber.Contains(searchString)) ||
-                                            (s.AcademicYear.Contains(searchString))).OrderBy(s => s.LastName);
-
-            return View(students);
+            return View(students.ToList());
         }
 
         //

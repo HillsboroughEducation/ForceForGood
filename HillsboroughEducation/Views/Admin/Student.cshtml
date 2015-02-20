@@ -10,29 +10,30 @@
     @using (Html.BeginForm())
     {
     <p>
-        Title: @Html.TextBox("SearchString") <br />
+        Search by: Last name, First name, Student #, D.O.B, or Academic Year <br/>
+        @Html.TextBox("SearchString")
         <input type="submit" value="Submit" />
     </p>
     }
     <table>
         <tr>
             <th>
-                @Html.ActionLink("Last Name", "Student", new { sortBy = 1 })
+                @Html.ActionLink("Last Name", "Student", new { sortOrder = ViewBag.LastNameSortParam })
             </th>
             <th>
-                @Html.ActionLink("First Name", "Student", new { sortBy = 2 })
+                @Html.ActionLink("First Name", "Student", new { sortOrder = ViewBag.FirstNameSortParam })
             </th>
             <th>
-                @Html.ActionLink("Student #", "Student", new { sortBy = 3 })
+                @Html.ActionLink("Student #", "Student", new { sortOrder = ViewBag.StudentNumberSortParam })
             </th>
             <th>
-                @Html.ActionLink("Username", "Student", new { sortBy = 4 })
+                @Html.ActionLink("Username", "Student", new { sortOrder = ViewBag.UserNameSortParam })
             </th>
             <th>
-                @Html.ActionLink("D.O.B", "Student", new { sortBy = 5 })
+                @Html.ActionLink("D.O.B", "Student", new { sortOrder = ViewBag.BirthDateSortParam })
             </th>
             <th>
-                @Html.ActionLink("Academic Year", "Student", new { sortBy = 6 })
+                @Html.ActionLink("Academic Year", "Student", new { sortOrder = ViewBag.AcademicYearSortParam })
             </th>
             <th></th>
         </tr>
