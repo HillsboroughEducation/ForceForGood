@@ -7,31 +7,35 @@
     <title>Student</title>
 </head>
 <body>
-    @helper sortLink(string name, int id) 
-    {
-        <a href="@Url.Action("Student", "Admin", new {sortby = id, isasc = (id == ViewBag.sortBy ? !@ViewBag.isAsc : @ViewBag.isAsc).ToString().ToLower() })">@name</a>
-        if (id == ViewBag.sortBy)
-        {
-            <span class="arrow @(ViewBag.isAsc ? "up" : "down" )"></span>
-        }
-    }
-    <h2>Manage Students</h2>
     @using (Html.BeginForm())
     {
-        @Html.DisplayName("Search by: First Name, Last Name, Middle Name, Student Number, or UserName")
-        <p>
-            @Html.TextBox("SearchString")
-        </p>
-        <input type="submit" value="Submit" /> 
-    } 
+    <p>
+        Search by: Last name, First name, Student #, D.O.B, or Academic Year <br/>
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Submit" />
+    </p>
+    }
     <table>
-        @* header *@
         <tr>
-            <th>@sortLink("Last Name", 1)</th>
-            <th>@sortLink("First Name", 2)</th>
-            <th>@sortLink("Student #", 3)</th>
-            <th>@sortLink("Username", 4)</th>
-            <th>@sortLink("D.O.B", 5)</th>
+            <th>
+                @Html.ActionLink("Last Name", "Student", new { sortOrder = ViewBag.LastNameSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("First Name", "Student", new { sortOrder = ViewBag.FirstNameSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Student #", "Student", new { sortOrder = ViewBag.StudentNumberSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Username", "Student", new { sortOrder = ViewBag.UserNameSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("D.O.B", "Student", new { sortOrder = ViewBag.BirthDateSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Academic Year", "Student", new { sortOrder = ViewBag.AcademicYearSortParam })
+            </th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)
@@ -51,6 +55,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcademicYear)
                 </td>
             </tr>
         }

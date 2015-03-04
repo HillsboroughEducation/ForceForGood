@@ -78,7 +78,9 @@ namespace HillsboroughEducation.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage= "Please enter Email Address ")]
+      //  [RegularExpression()]
+        [EmailAddress(ErrorMessage= "Please Enter Valid Email Address")]
         [Display(Name = "Email")]
         public string UserName { get; set; }
 
@@ -112,6 +114,7 @@ namespace HillsboroughEducation.Models
     public class ResetPasswordModel
     {
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [Display(Name = "New Password")]
         [DataType(DataType.Password)]
         public string Password { get; set;}

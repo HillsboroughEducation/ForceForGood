@@ -21,59 +21,81 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Admin/Student
-        public ActionResult Student(int sortBy = 1, bool isAsc = true)
+        public ActionResult Student(string sortOrder, string searchString)
         {
-            IEnumerable<StudentModel> students;
-            var studentlist = db.StudentProfiles.ToList();
+            ViewBag.LastNameSortParam = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstName" ? "firstName_desc" : "FirstName";
+            ViewBag.StudentNumberSortParam = sortOrder == "StudentNumber" ? "studentNumber_desc" : "StudentNumber";
+            ViewBag.UserNameSortParam = sortOrder == "UserName" ? "userName_desc" : "UserName";
+            ViewBag.BirthDateSortParam = sortOrder == "BirthDate" ? "birthDate_desc" : "BirthDate";
+            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
+            var students = from s in db.StudentProfiles
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => (s.UserName.Contains(searchString)) ||
+                                            (s.LastName.Contains(searchString)) ||
+                                            (s.MiddleName.Contains(searchString)) ||
+                                            (s.FirstName.Contains(searchString)) ||
+                                            (s.StudentNumber.Contains(searchString)) ||
+                                            (s.AcademicYear.Contains(searchString))).OrderBy(s => s.LastName);
+            }
 
             #region Sorting
-            switch (sortBy)
+            switch (sortOrder)
             {
-                case 1:
-                    students = isAsc ? studentlist.OrderBy(s => s.LastName) : studentlist.OrderByDescending(s => s.LastName);
+                case "lastName_desc":
+                    students = students.OrderByDescending(s => s.LastName);
                     break;
 
-                case 2:
-                    students = isAsc ? studentlist.OrderBy(s => s.FirstName) : studentlist.OrderByDescending(s => s.FirstName);
+                case "FirstName":
+                    students = students.OrderBy(s => s.FirstName);
                     break;
 
-                case 3:
-                    students = isAsc ? studentlist.OrderBy(s => s.StudentNumber) : studentlist.OrderByDescending(s => s.StudentNumber);
+                case "firstName_desc":
+                    students = students.OrderByDescending(s => s.FirstName);
                     break;
 
-                case 4:
-                    students = isAsc ? studentlist.OrderBy(s => s.UserName) : studentlist.OrderByDescending(s => s.UserName);
+                case "StudentNumber":
+                    students = students.OrderBy(s => s.StudentNumber);
                     break;
 
-                case 5:
-                    students = isAsc ? studentlist.OrderBy(s => s.BirthDate) : studentlist.OrderByDescending(s => s.BirthDate);
+                case "studenNumber_desc":
+                    students = students.OrderByDescending(s => s.StudentNumber);
+                    break;
+
+                case "UserName":
+                    students = students.OrderBy(s => s.UserName);
+                    break;
+
+                case "userName_desc":
+                    students = students.OrderByDescending(s => s.UserName);
+                    break;
+
+                case "BirthDate":
+                    students = students.OrderBy(s => s.BirthDate);
+                    break;
+
+                case "birthDate_desc":
+                    students = students.OrderByDescending(s => s.BirthDate);
+                    break;
+
+                case "AcademicYear":
+                    students = students.OrderBy(s => s.AcademicYear);
+                    break;
+
+                case "academicYear_desc":
+                    students = students.OrderByDescending(s => s.AcademicYear);
                     break;
 
                 default:
-                    students = isAsc ? studentlist.OrderBy(s => s.LastName) : studentlist.OrderByDescending(s => s.LastName);
+                    students = students.OrderBy(s => s.LastName);
                     break;
             }
             #endregion
 
-            ViewBag.SortBy = sortBy;
-            ViewBag.IsAsc = isAsc;
-
-            return View(students);
-        }
-
-        //
-        // POST: /Admin/Student
-        [HttpPost]
-        public ActionResult Student(string sortOrder, string searchString)
-        {
-            var students = from s in db.StudentProfiles select s;
-            students = students.Where(s => (s.UserName.Contains(searchString)) || 
-                                           (s.LastName.Contains(searchString)) ||
-                                           (s.MiddleName.Contains(searchString)) ||
-                                           (s.FirstName.Contains(searchString)) ||
-                                           (s.StudentNumber.Contains(searchString))).OrderBy(s => s.LastName);
-
-            return View(students);
+            return View(students.ToList());
         }
 
         //

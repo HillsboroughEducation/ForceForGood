@@ -37,5 +37,9 @@ namespace HillsboroughEducation.Models
         [Required]
         [Display(Name = "Username")]
         public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Academic Year")]
+        public string AcademicYear { get; set; }
     }
 }
