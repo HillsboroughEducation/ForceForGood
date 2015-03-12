@@ -355,6 +355,7 @@
     <Content Include="Views\Student\MyInfo.cshtml" />
     <Content Include="Views\Student\Scholarship.cshtml" />
     <Content Include="Views\Student\Application.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

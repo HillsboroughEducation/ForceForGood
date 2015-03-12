@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HillsboroughEducation", "HillsboroughEducation\HillsboroughEducation.csproj", "{D8D07239-9125-48C7-8A7A-1E217BA8C8BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HillsboroughEducation.Tests", "HillsboroughEducation.Tests\HillsboroughEducation.Tests.csproj", "{BCA57053-26EC-48F4-9BE4-E609E1504A70}"

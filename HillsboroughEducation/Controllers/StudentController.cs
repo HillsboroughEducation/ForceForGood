@@ -9,7 +9,6 @@ namespace HillsboroughEducation.Controllers
 {
     public class StudentController : Controller
     {
-
         private UsersContext db = new UsersContext();
         //
         // GET: /Student/
@@ -34,7 +33,7 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
-        // GET: /Student/Applications
+        // GET: /Student/Application
         public ActionResult Application()
         {
             return View();
