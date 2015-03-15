@@ -1,5 +1,59 @@
-﻿@{
+﻿@model IEnumerable<HillsboroughEducation.Models.ScholarshipModel>
+@{
     ViewBag.Title = "Scholarship";
 }
 
-<h2>Manage Scholarship</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Search by: Scholarship Name, Type, or Academic Year <br />
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Submit" />
+    </p>
+}
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Scholarship Name", "Scholarship", new { sortOrder = ViewBag.ScholarShipNameSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Scholarship Type", "Scholarship", new { sortOrder = ViewBag.ScholarShipTypeSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("# of Applicants", "Scholarship", new { sortOrder = ViewBag.NumOfApplicantsSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Scholarship Amount", "Scholarship", new { sortOrder = ViewBag.AmountSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Academic Year", "Scholarship", new { sortOrder = ViewBag.AcademicYearSortParam })
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScholarshipName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScholarshipType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfApplicants)
+            </td>
+            <td>
+                $@Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademicYear)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "ScholarshipInfo", new { id = item.ScholarshipId })
+            </td>
+        </tr>
+    }
+</table>
+

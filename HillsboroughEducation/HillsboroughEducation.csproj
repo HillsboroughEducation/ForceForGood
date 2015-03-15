@@ -192,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ScholarshipModel.cs" />
     <Compile Include="Models\StudentModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -356,6 +357,7 @@
     <Content Include="Views\Student\Scholarship.cshtml" />
     <Content Include="Views\Student\Application.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Admin\StudentInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

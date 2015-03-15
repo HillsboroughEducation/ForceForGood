@@ -59,9 +59,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AcademicYear)
                 </td>
+                <td>
+                    @Html.ActionLink("Details", "StudentInfo", new { id = item.UserId })
+                </td>
             </tr>
         }
-
     </table>
 </body>
 </html>
