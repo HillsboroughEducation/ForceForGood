@@ -110,6 +110,16 @@ namespace HillsboroughEducation.Controllers
             return View(student);
         }
 
+        public ActionResult StudentFinancialInfo(int id = 1)
+        {
+            StudentFinancialModel student = db.FinancialInfoProfiles.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
+
         //
         // GET: /Admin/Scholarship
         public ActionResult Scholarship(string sortOrder, string searchString)
