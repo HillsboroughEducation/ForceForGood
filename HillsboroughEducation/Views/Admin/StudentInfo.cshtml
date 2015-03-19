@@ -1,0 +1,212 @@
+﻿@model HillsboroughEducation.Models.StudentModel
+
+@{
+    ViewBag.Title = "StudentInfo";
+}
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+<body>
+
+    <h2>StudentPersonal</h2>
+
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+        @Html.DisplayFor(model => model.MiddleName)
+        @Html.DisplayFor(model => model.LastName)
+        (@Html.DisplayFor(model => model.StudentNumber))
+    </div>
+    <div id="tabs">
+        <ul>
+            <li><a href="#personal">Personal Information</a></li>
+            <li><a href="#financial">Financial Information</a></li>
+            <li><a href="#academic">Academic Information</a></li>
+            <li><a href="#scores">Test Scores</a></li>
+            <li><a href="#question">Questionnaire</a></li>
+            <li><a href="#application">Scholarship Applications</a></li>
+            <li><a href="#essay">Student Essay Questions</a></li>
+            <li><a href="#documents">Documents</a></li>
+        </ul>
+
+        <div id="personal">
+            <h2>Personal Information</h2>
+            <section>
+                Academic Year:
+                @Html.DisplayFor(model => model.AcademicYear)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.FirstName)
+            </section>
+            <section>
+                Social Security #:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Last Name:
+                @Html.DisplayFor(model => model.LastName)
+            </section>
+            <section>
+                Country:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Gender:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Ethnicity:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Date of Birth:
+                @Html.DisplayFor(model => model.BirthDate)
+            </section>
+            <section>
+                Country:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Address 1:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                City:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                State:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                County:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Postal Code:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                School Student ID#:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                STARS Generated Student ID #:
+                @Html.DisplayFor(model => model.StudentNumber)
+            </section>
+            <section>
+                Home Phone:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Work Phone:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Cell Phone:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Email Address/Username:
+                @Html.DisplayFor(model => model.UserName)
+            </section>
+            <section>
+                Notes:
+                @Html.DisplayText("")
+            </section>
+        </div>
+
+        <div id="financial">
+            Need Financial Info Criteria
+        </div>
+
+        <div id="academic">
+            <h2>Academic Information</h2>
+            <section>
+                Type of Student:
+            </section>
+            <section>
+                School Name:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Exp. HS Graduation Date:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                GPA:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Major are of study or program:
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Exp. Degree:
+                @Html.DisplayText("")
+            </section>
+        </div>
+
+        <div id="scores">
+            <h2>Test Scores</h2>
+            <h3>ACT_SCORES_COME_UNDER_THIS_GROUP Scores</h3>
+            <h3>SAT_SCORES_COME_UNDER_THIS_GROUP Scores</h3>
+            <h3>FAFSA_SCORE Scores</h3>
+        </div>
+
+        <div id="question">
+            <h2>Opening Questionnaire</h2>
+            <section>
+                Which of the following types of student most closely matches you?
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Do you attend a charted school?
+                @Html.DisplayText("")
+            </section>
+            <section>
+                In what grade are you?
+                @Html.DisplayText("")
+            </section>
+            <section>
+                Do you qualify for free or reduced lunch:
+                @Html.DisplayText("")
+            </section>
+        </div>
+
+        <div id="application">
+            <h2>Scholarship Application Information</h2>
+            <table>
+                <tr>
+                    <th>
+                        Scholarship Name
+                    </th>
+                    <th>
+                        Date Applied
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="essay">
+            <h2>Student Essay Questions</h2>
+        </div>
+
+        <div id="documents">
+            <h2>Documents</h2>
+        </div>
+
+        <p>
+            @Html.ActionLink("Back to List", "Student", "Admin", "", "")
+            <a href="#tabs">Top</a>
+        </p>
+    </div>
+</body>
+
