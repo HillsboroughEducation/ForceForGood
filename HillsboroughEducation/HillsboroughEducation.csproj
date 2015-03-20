@@ -360,6 +360,8 @@
     <Content Include="Views\Student\Application.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Admin\StudentFinancialInfo.cshtml" />
+    <Content Include="Views\Student\ScholarshipApplication.cshtml" />
+    <Content Include="Views\Student\ScholarshipDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

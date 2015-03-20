@@ -27,9 +27,51 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Student/Scholarship
-        public ActionResult Scholarship()
+        public ActionResult Scholarship(string sortOrder, string searchString)
         {
-            return View();
+            ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarshipName_desc" : "";
+            ViewBag.ScholarShipTypeSortParam = sortOrder == "ScholarshipType" ? "scholarshipType_desc" : "ScholarshipType";
+            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
+            var scholarships = from s in db.ScholarshipProfiles
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                scholarships = scholarships.Where(s => (s.ScholarshipName.Contains(searchString)) ||
+                                            (s.ScholarshipType.Contains(searchString)) ||
+                                            (s.AcademicYear.Contains(searchString))).OrderBy(s => s.ScholarshipName);
+            }
+
+            #region Sorting
+            switch (sortOrder)
+            {
+                case "scholarshipName_desc":
+                    scholarships = scholarships.OrderByDescending(s => s.ScholarshipName);
+                    break;
+
+                case "ScholarshipType":
+                    scholarships = scholarships.OrderBy(s => s.ScholarshipType);
+                    break;
+
+                case "scholarshipType_desc":
+                    scholarships = scholarships.OrderByDescending(s => s.ScholarshipType);
+                    break;
+
+                case "AcademicYear":
+                    scholarships = scholarships.OrderBy(s => s.AcademicYear);
+                    break;
+
+                case "academicYear_desc":
+                    scholarships = scholarships.OrderByDescending(s => s.AcademicYear);
+                    break;
+
+                default:
+                    scholarships = scholarships.OrderBy(s => s.ScholarshipName);
+                    break;
+            }
+            #endregion
+
+            return View(scholarships.ToList());
         }
 
         //
