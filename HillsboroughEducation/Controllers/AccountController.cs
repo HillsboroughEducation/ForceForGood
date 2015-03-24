@@ -16,10 +16,12 @@ using HillsboroughEducation.util;
 
 namespace HillsboroughEducation.Controllers
 {
+   
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private UsersContext db = new UsersContext();
         SendEmail email = new SendEmail();
 
         //
@@ -42,6 +44,10 @@ namespace HillsboroughEducation.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                UserProfile User = db.UserProfiles.SingleOrDefault(user => user.UserName == model.UserName);
+                FormsAuthentication.SetAuthCookie(User.FirstName + " " + User.LastName, false);
+
+
                 return RedirectToLocal(returnUrl);
             }
 
@@ -58,7 +64,7 @@ namespace HillsboroughEducation.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
+            FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }
 
