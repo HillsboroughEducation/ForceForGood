@@ -1,14 +1,23 @@
-﻿@model IEnumerable<HillsboroughEducation.Models.ScholarshipModel>
+﻿@using System.Web.Helpers;
+@model IEnumerable<HillsboroughEducation.Models.ScholarshipModel>
 @{
-    ViewBag.Title = "Scholarship";
+    var grid = new WebGrid(source: Model, defaultSort: "Scholarship", rowsPerPage: 20);
 }
-
-@using (Html.BeginForm())
+        <div id="tableBox" style="width:800px">
+        <div class="Title">Find a Scholarship
+        </div>
+        <div id="searchParameters" style="width:778px;background:#FFFFFF;padding:10px; border:1px solid #000000">
+            <h3>Search Parameters</h3><br />
+            <form method="get">
+                <div>
+                    <div style="padding-bottom:5px">
+                      @using (Html.BeginForm())
 {
     <p>
         Search by: Scholarship Name, Type, or Academic Year <br />
         @Html.TextBox("SearchString")
-        <input type="submit" value="Submit" />
+         <input id="searchSubmit" type="submit" value="Search" tabindex="7" style="margin-left:230px"/>
+         <input id="searchReset" type="submit" value="Clear" tabindex="8" style="margin-left:90px"/>
     </p>
 }
 <table>
@@ -43,5 +52,9 @@
             </td>
         </tr>
     }
-</table>
-
+</table>             
+                    </div>
+                </div>
+            </form>
+        </div>
+            </div>

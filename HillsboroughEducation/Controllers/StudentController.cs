@@ -20,18 +20,33 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Student/MyInfo
-        public ActionResult MyInfo()
+        public ActionResult MyInfo(int id = 1)
         {
-            return View();
+            StudentModel studentinfo = db.StudentProfiles.Find(id);
+            if (studentinfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(studentinfo);
+        }
+
+        public ActionResult FinancialInfo(int id = 1)
+        {
+            StudentFinancialModel financialinfo = db.FinancialInfoProfiles.Find(id);
+            if (financialinfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(financialinfo);
         }
 
         //
         // GET: /Student/Scholarship
         public ActionResult Scholarship(string sortOrder, string searchString)
         {
-            ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarshipName_desc" : "";
-            ViewBag.ScholarShipTypeSortParam = sortOrder == "ScholarshipType" ? "scholarshipType_desc" : "ScholarshipType";
-            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
+            ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarship Name_desc" : "";
+            ViewBag.ScholarShipTypeSortParam = sortOrder == "Scholarship Type" ? "scholarship Type_desc" : "Scholarship Type";
+            ViewBag.AcademicYearSortParam = sortOrder == "Academic Year" ? "academic Year_desc" : "Academic Year";
             var scholarships = from s in db.ScholarshipProfiles
                                select s;
 
@@ -45,23 +60,23 @@ namespace HillsboroughEducation.Controllers
             #region Sorting
             switch (sortOrder)
             {
-                case "scholarshipName_desc":
+                case "scholarship Name_desc":
                     scholarships = scholarships.OrderByDescending(s => s.ScholarshipName);
                     break;
 
-                case "ScholarshipType":
+                case "Scholarship Type":
                     scholarships = scholarships.OrderBy(s => s.ScholarshipType);
                     break;
 
-                case "scholarshipType_desc":
+                case "scholarship Type_desc":
                     scholarships = scholarships.OrderByDescending(s => s.ScholarshipType);
                     break;
 
-                case "AcademicYear":
+                case "Academic Year":
                     scholarships = scholarships.OrderBy(s => s.AcademicYear);
                     break;
 
-                case "academicYear_desc":
+                case "academic Year_desc":
                     scholarships = scholarships.OrderByDescending(s => s.AcademicYear);
                     break;
 
@@ -81,6 +96,9 @@ namespace HillsboroughEducation.Controllers
             return View();
         }
 
+        public ActionResult testmyinfo()
+        {
+            return View();
+        }
     }
-
 }

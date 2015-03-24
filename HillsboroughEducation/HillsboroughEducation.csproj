@@ -362,6 +362,7 @@
     <Content Include="Views\Admin\StudentFinancialInfo.cshtml" />
     <Content Include="Views\Student\ScholarshipApplication.cshtml" />
     <Content Include="Views\Student\ScholarshipDetails.cshtml" />
+    <Content Include="Views\Student\Testmyinfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
