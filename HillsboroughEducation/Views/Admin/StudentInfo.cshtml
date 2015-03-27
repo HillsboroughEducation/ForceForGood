@@ -5,10 +5,14 @@
 }
 
 <script>
-    $(function () {
-        $("#tabs").tabs();
+    $m = jQuery.noConflict();
+</script>
+<script type="text/javascript">
+    $m(document).ready(function () {
+        $m('#tabs').tabs();
     });
 </script>
+
 <body>
 
     <h2>StudentPersonal</h2>
