@@ -343,7 +343,6 @@
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -362,6 +361,10 @@
     <Content Include="Views\Student\ScholarshipApplication.cshtml" />
     <Content Include="Views\Student\ScholarshipDetails.cshtml" />
     <Content Include="Views\Admin\StudentFinancialInfo.cshtml" />
+    <Content Include="Views\Admin\StudentScholarship.cshtml" />
+    <Content Include="Views\Admin\ScholarshipInfo.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Admin\CreateScholarship.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

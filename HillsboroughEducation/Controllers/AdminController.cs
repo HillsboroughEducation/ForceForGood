@@ -4,12 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HillsboroughEducation.Models;
+using System.Data;
+using System.Data.Objects;
 
 namespace HillsboroughEducation.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class AdminController : Controller
     {
         private UsersContext db = new UsersContext();
+        private ScholarshipContext dbScholarship = new ScholarshipContext();
 
         //
         // GET: /Admin/
@@ -137,6 +141,18 @@ namespace HillsboroughEducation.Controllers
             return View(financialInfo);
         }
 
+        public ActionResult StudentScholarship(int id = 1)
+        {
+            ScholarshipModel scholarshipInfo = dbScholarship.ScholarshipProfiles.Find(id);
+
+            if (scholarshipInfo == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(scholarshipInfo);
+        }
+
         //
         // GET: /Admin/Scholarship
         public ActionResult Scholarship(string sortOrder, string searchString)
@@ -146,7 +162,7 @@ namespace HillsboroughEducation.Controllers
             ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
             ViewBag.NumOfApplicantsSortParam = sortOrder == "NumOfApplicants" ? "numOfApplicants_desc" : "NumOfApplicants";
             ViewBag.AmountSortParam = sortOrder == "Amount" ? "amount_desc" : "Amount";
-            var scholarships = from s in db.ScholarshipProfiles
+            var scholarships = from s in dbScholarship.ScholarshipProfiles
                            select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -202,6 +218,48 @@ namespace HillsboroughEducation.Controllers
             #endregion
 
             return View(scholarships.ToList());
+        }
+
+        public ActionResult ScholarshipInfo(int id = 1)
+        {
+            ScholarshipModel scholarship = dbScholarship.ScholarshipProfiles.Find(id);
+
+            if (scholarship == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(scholarship);
+        }
+
+        //
+        // GET:  /Admin/CreateScholarship
+        public ActionResult CreateScholarship()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Admin/CreateScholarship
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateScholarship([Bind(Include = "ScholarshipName, ScholarshipType, AcademicYear, NumOfApplicants, Amount")] ScholarshipModel scholarship)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbScholarship.ScholarshipProfiles.Add(scholarship);
+                    dbScholarship.SaveChanges();                   
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(scholarship);
         }
 
         //

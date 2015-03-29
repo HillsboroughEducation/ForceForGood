@@ -15,8 +15,6 @@
 
 <body>
 
-    <h2>StudentPersonal</h2>
-
     <div class="display-field">
         @Html.DisplayFor(model => model.FirstName)
         @Html.DisplayFor(model => model.MiddleName)
@@ -30,7 +28,7 @@
             <li><a href="#academic">Academic Information</a></li>
             <li><a href="#scores">Test Scores</a></li>
             <li><a href="#question">Questionnaire</a></li>
-            <li><a href="#application">Scholarship Applications</a></li>
+            <li>@Html.ActionLink("Scholarship Information", "StudentScholarship", "Admin", new { id = Model.UserId }, "")</li>
             <li><a href="#essay">Student Essay Questions</a></li>
             <li><a href="#documents">Documents</a></li>
         </ul>
@@ -181,24 +179,6 @@
             </section>
         </div>
 
-        <div id="application">
-            <h2>Scholarship Application Information</h2>
-            <table>
-                <tr>
-                    <th>
-                        Scholarship Name
-                    </th>
-                    <th>
-                        Date Applied
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th></th>
-                </tr>
-            </table>
-        </div>
-
         <div id="essay">
             <h2>Student Essay Questions</h2>
         </div>
@@ -209,7 +189,6 @@
 
         <p>
             @Html.ActionLink("Back to List", "Student", "Admin", "", "")
-            <a href="#tabs">Top</a>
         </p>
     </div>
 </body>

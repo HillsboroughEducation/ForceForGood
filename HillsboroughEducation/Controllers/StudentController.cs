@@ -10,6 +10,8 @@ namespace HillsboroughEducation.Controllers
     public class StudentController : Controller
     {
         private UsersContext db = new UsersContext();
+        private ScholarshipContext dbScholarship = new ScholarshipContext();
+
         //
         // GET: /Student/
 
@@ -47,7 +49,7 @@ namespace HillsboroughEducation.Controllers
             ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarship Name_desc" : "";
             ViewBag.ScholarShipTypeSortParam = sortOrder == "Scholarship Type" ? "scholarship Type_desc" : "Scholarship Type";
             ViewBag.AcademicYearSortParam = sortOrder == "Academic Year" ? "academic Year_desc" : "Academic Year";
-            var scholarships = from s in db.ScholarshipProfiles
+            var scholarships = from s in dbScholarship.ScholarshipProfiles
                                select s;
 
             if (!String.IsNullOrEmpty(searchString))

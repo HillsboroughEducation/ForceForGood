@@ -8,10 +8,19 @@ using System.Web.Security;
 
 namespace HillsboroughEducation.Models
 {
+    public class ScholarshipContext : DbContext {
+        public ScholarshipContext()
+            : base("DefaultConnection")
+        {
+        }
+        public DbSet<ScholarshipModel> ScholarshipProfiles { get; set; }
+    }
+   
+
     [Table("ScholarshipProfile")]
     public class ScholarshipModel
     {
-        
+
         [Key]
         public int ScholarshipId { get; set; }
 

@@ -45,8 +45,11 @@ namespace HillsboroughEducation.Controllers
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 UserProfile User = db.UserProfiles.SingleOrDefault(user => user.UserName == model.UserName);
-                FormsAuthentication.SetAuthCookie(User.FirstName + " " + User.LastName, false);
-
+                string adminUrl = "http://localhost:56392/Admin/Index";
+                if (Roles.IsUserInRole(User.UserName, "Admin")) {
+                    return Redirect(adminUrl);
+                }
+                //FormsAuthentication.SetAuthCookie(User.FirstName + " " + User.LastName, false);
 
                 return RedirectToLocal(returnUrl);
             }
@@ -147,6 +150,14 @@ namespace HillsboroughEducation.Controllers
                 }
             }
             return View(model);
+        }
+
+        //
+        // GET:  /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
         }
 
         //
