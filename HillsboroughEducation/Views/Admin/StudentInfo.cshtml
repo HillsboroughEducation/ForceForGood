@@ -22,7 +22,7 @@
     <div id="tabs">
         <ul>
             <li><a href="#personal">Personal Information</a></li>
-            <li>@Html.ActionLink("Financial Information", "StudentFinancialInfo", "Admin", "", "")</li>
+            <li>@Html.ActionLink("Financial Information", "StudentFinancialInfo", "Admin", new { id = Model.UserId}, "")</li>
             <li><a href="#academic">Academic Information</a></li>
             <li><a href="#scores">Test Scores</a></li>
             <li><a href="#question">Questionnaire</a></li>
@@ -33,6 +33,10 @@
 
         <div id="personal">
             <h2>Personal Information</h2>
+            <section>
+                UserId:
+                @Html.DisplayFor(model => model.UserId)
+            </section>
             <section>
                 Academic Year:
                 @Html.DisplayFor(model => model.AcademicYear)
@@ -117,10 +121,6 @@
                 Notes:
                 @Html.DisplayText("")
             </section>
-        </div>
-
-        <div id="financial">
-            Need Financial Info Criteria
         </div>
 
         <div id="academic">

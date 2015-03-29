@@ -112,12 +112,29 @@ namespace HillsboroughEducation.Controllers
 
         public ActionResult StudentFinancialInfo(int id = 1)
         {
-            StudentFinancialModel student = db.FinancialInfoProfiles.Find(id);
-            if (student == null)
+            StudentFinancialModel financialInfo = db.FinancialInfoProfiles.Find(id);
+            if (financialInfo.FinancialNeedEligible.Equals("y"))
+            {
+                financialInfo.FinancialNeedEligible = "Yes";
+            }
+            else if (financialInfo.FinancialNeedEligible.Equals("n"))
+            {
+                financialInfo.FinancialNeedEligible = "No";
+            }
+
+            if (financialInfo.ReceivedSSCard.Equals("y"))
+            {
+                financialInfo.ReceivedSSCard = "Yes";
+            }
+            else if (financialInfo.ReceivedSSCard.Equals("n"))
+            {
+                financialInfo.ReceivedSSCard = "No";
+            }
+            if (financialInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(financialInfo);
         }
 
         //

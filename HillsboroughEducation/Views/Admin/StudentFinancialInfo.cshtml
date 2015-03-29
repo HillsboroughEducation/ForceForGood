@@ -4,4 +4,35 @@
     ViewBag.Title = "StudentFinancialInfo";
 }
 
-<h2>StudentFinancialInfo</h2>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FinancialNeedEligible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdjustedGrossIncome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberInHousehold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceivedSSCard)
+
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.FinancialNeedEligible)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AdjustedGrossIncome)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.NumberInHousehold)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.ReceivedSSCard)
+        </td>
+    </tr>
+</table>
