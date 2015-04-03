@@ -93,7 +93,7 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Student/Application
-        public ActionResult Application()
+        public ActionResult ScholarshipApplication()
         {
             return View();
         }
