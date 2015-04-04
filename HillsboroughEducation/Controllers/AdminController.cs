@@ -7,6 +7,7 @@ using HillsboroughEducation.Models;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity.Infrastructure;
+using System.Web.Security;
 
 namespace HillsboroughEducation.Controllers
 {
@@ -17,10 +18,35 @@ namespace HillsboroughEducation.Controllers
         private ScholarshipContext dbScholarship = new ScholarshipContext();
 
         //
-        // GET: /Admin/
-
+        // GET: /Admin/Index
         public ActionResult Index()
         {
+            return View();
+        }
+
+        //
+        // POST: /Admin/Index
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(String UserName)
+        {
+            try
+            {
+                if (Roles.IsUserInRole(UserName, "Admin"))
+                {
+                    ViewBag.Message = "User already exists.";
+                }
+                else
+                {
+                    Roles.AddUserToRole(UserName, "Admin");
+                    ViewBag.Message = "User created successfully.";
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                ViewBag.Message = "User does not exist.";
+            }
+
             return View();
         }
 
@@ -247,13 +273,21 @@ namespace HillsboroughEducation.Controllers
         public ActionResult CreateScholarship(ScholarshipModel scholarship)
         {
             var errors = GetRealErrors(ModelState);
-            if (ModelState.IsValid)
+            try
             {
-                dbScholarship.ScholarshipProfiles.Add(scholarship);
-                dbScholarship.SaveChanges();              
-                return RedirectToAction("Index", "Admin");
+                if (ModelState.IsValid)
+                {
+                    dbScholarship.ScholarshipProfiles.Add(scholarship);
+                    dbScholarship.SaveChanges();              
+                    return RedirectToAction("Index", "Admin");
+                }
             }
-            
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
 
             return View(scholarship);
         }
