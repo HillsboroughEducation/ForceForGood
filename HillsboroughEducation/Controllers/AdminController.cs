@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using HillsboroughEducation.Models;
 using System.Data;
 using System.Data.Objects;
+using System.Data.Entity.Infrastructure;
 
 namespace HillsboroughEducation.Controllers
 {
@@ -243,23 +244,38 @@ namespace HillsboroughEducation.Controllers
         // POST: /Admin/CreateScholarship
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateScholarship([Bind(Include = "ScholarshipName, ScholarshipType, AcademicYear, NumOfApplicants, Amount")] ScholarshipModel scholarship)
+        public ActionResult CreateScholarship(ScholarshipModel scholarship)
         {
-            try
+            var errors = GetRealErrors(ModelState);
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    dbScholarship.ScholarshipProfiles.Add(scholarship);
-                    dbScholarship.SaveChanges();                   
-                    return RedirectToAction("Index", "Admin");
-                }
+                dbScholarship.ScholarshipProfiles.Add(scholarship);
+                dbScholarship.SaveChanges();              
+                return RedirectToAction("Index", "Admin");
             }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
+            
 
             return View(scholarship);
+        }
+
+        private IEnumerable<ModelError> GetRealErrors(IEnumerable<KeyValuePair<string, ModelState>> modelStateDictionary)
+        {
+            var errorMessages = new List<ModelError>();
+            foreach (var keyValuePair in modelStateDictionary)
+            {
+                if (keyValuePair.Value.Errors.Count > 0)
+                {
+                    foreach (var error in keyValuePair.Value.Errors)
+                    {
+                        if (!error.ErrorMessage.Contains("Info"))
+                        {
+                            errorMessages.Add(error);
+                        }
+                    }
+                }
+
+            }
+            return errorMessages;
         }
 
         //

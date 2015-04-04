@@ -246,6 +246,10 @@
     <Compile Include="util\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-HillsboroughEducation-20150127162812.mdf" />
+    <Content Include="App_Data\aspnet-HillsboroughEducation-20150127162812_log.ldf">
+      <DependentUpon>aspnet-HillsboroughEducation-20150127162812.mdf</DependentUpon>
+    </Content>
     <Content Include="Images\arrow-down.png" />
     <Content Include="Images\arrow-up.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -426,15 +430,14 @@
     <Content Include="Views\Admin\StudentScholarship.cshtml" />
     <Content Include="Views\Admin\ScholarshipInfo.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Admin\CreateScholarship.cshtml" />
     <Content Include="Views\Reviewer\Index.cshtml" />
     <Content Include="Views\Shared\_ReviewerLayout.cshtml" />
     <Content Include="Views\Reviewer\ReviewApplications.cshtml" />
     <Content Include="Views\Reviewer\MyInfo.cshtml" />
     <Content Include="Views\Reviewer\Dashboard.cshtml" />
+    <Content Include="Views\Admin\CreateScholarship.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
@@ -457,7 +460,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>56392</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

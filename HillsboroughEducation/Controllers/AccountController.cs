@@ -45,9 +45,8 @@ namespace HillsboroughEducation.Controllers
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 UserProfile User = db.UserProfiles.SingleOrDefault(user => user.UserName == model.UserName);
-                string adminUrl = "http://localhost:56392/Admin/Index";
                 if (Roles.IsUserInRole(User.UserName, "Admin")) {
-                    return Redirect(adminUrl);
+                    return RedirectToAction("Index", "Admin");
                 }
                 //FormsAuthentication.SetAuthCookie(User.FirstName + " " + User.LastName, false);
 

@@ -12,6 +12,7 @@ namespace HillsboroughEducation.Models
     public class StudentModel
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
 
         [Required]
