@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "ManageUserRoles";
+}
+
+<h2>Create New Admin</h2>
+
+@using (Html.BeginForm("CreateAdmin", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <p>
+            Username : @Html.TextBox("UserName")
+        </p>
+
+        <input type="submit" value="Save" />
+    </fieldset>
+    <h2>@ViewBag.Message</h2>
+}
+<hr />
