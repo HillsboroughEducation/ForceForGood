@@ -433,6 +433,15 @@
     <Content Include="Views\Reviewer\Dashboard.cshtml" />
     <Content Include="Views\Admin\CreateScholarship.cshtml" />
     <Content Include="Views\Admin\CreateAdmin.cshtml" />
+    <Content Include="Views\Student\CreatePersonalInfo.cshtml" />
+    <Content Include="Views\Student\CreateFinancialInfo.cshtml" />
+    <Content Include="Views\Student\EditFinancialInfo.cshtml" />
+    <Content Include="Views\Student\CreateAcademicInfo.cshtml" />
+    <Content Include="Views\Student\DeleteFinancialInfo.cshtml" />
+    <Content Include="Views\Student\DeletePersonalInfo.cshtml" />
+    <Content Include="Views\Student\DeleteAcademicInfo.cshtml" />
+    <Content Include="Views\Student\EditPersonalInfo.cshtml" />
+    <Content Include="Views\Student\EditAcademicInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

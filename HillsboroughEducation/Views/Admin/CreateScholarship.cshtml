@@ -4,7 +4,7 @@
     ViewBag.Title = "CreateScholarship";
 }
 
-<h2>CreateScholarship</h2>
+<h2>Create a Scholarship</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -46,11 +46,11 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Amount)
+            @Html.LabelFor(model => model.TotalScholarshipFunds)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Amount)
-            @Html.ValidationMessageFor(model => model.Amount)
+            @Html.EditorFor(model => model.TotalScholarshipFunds)
+            @Html.ValidationMessageFor(model => model.TotalScholarshipFunds)
         </div>
 
         <p>

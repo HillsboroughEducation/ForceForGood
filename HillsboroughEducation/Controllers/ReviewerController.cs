@@ -4,9 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HillsboroughEducation.Models;
+using System.Data;
+using System.Data.Objects;
+using System.Data.Entity.Infrastructure;
+using System.Web.Security;
 
 namespace HillsboroughEducation.Controllers
 {
+    [Authorize(Roles = "Reviewer")]
     public class ReviewerController : Controller
     {
         private UsersContext db = new UsersContext();
@@ -14,8 +19,27 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Reviewer/Index
-        public ActionResult Index()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(String UserName)
         {
+            try
+            {
+                if (Roles.IsUserInRole(UserName, "Reviewer"))
+                {
+                    ViewBag.Message = "User already exists.";
+                }
+                else
+                {
+                    Roles.AddUserToRole(UserName, "Reviewer");
+                    ViewBag.Message = "User created successfully.";
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                ViewBag.Message = "User does not exist.";
+            }
+
             return View();
         }
 
