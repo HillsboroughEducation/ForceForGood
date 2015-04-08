@@ -50,6 +50,10 @@ namespace HillsboroughEducation.Models
         public string DateAvailable { get; set; }
 
         [Required]
+        [Display(Name = "Amount")]
+        public int Amount { get; set; }
+
+        [Required]
         [Display(Name = "Total Scholarship Funds")]
         public float TotalScholarshipFunds { get; set; }
 

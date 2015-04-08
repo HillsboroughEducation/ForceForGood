@@ -72,7 +72,7 @@ namespace HillsboroughEducation.Controllers
                 {
                     dbStudent.StudentProfiles.Add(student);
                     dbStudent.SaveChanges();
-                    return RedirectToAction("Index", "MyInfo");
+                    return RedirectToAction("Index", "Student");
                 }
             }
             catch (DataException dex)
@@ -118,7 +118,7 @@ namespace HillsboroughEducation.Controllers
                 {
                     dbFinancial.FinancialInfoProfiles.Add(financial);
                     dbFinancial.SaveChanges();
-                    return RedirectToAction("Index", "MyInfo");
+                    return RedirectToAction("Index", "Student");
                 }
             }
             catch (DataException dex)
@@ -156,111 +156,6 @@ namespace HillsboroughEducation.Controllers
 
             return View(criteria);
         } */
-
-        //
-        // Get: /Student/DeletePersonalInfo
-        public ActionResult DeletePersonalInfo(int id, bool? concurrencyError)
-        {
-           StudentModel student = db.StudentProfiles.Find(id);
-
-           if (concurrencyError.GetValueOrDefault())
-           {
-              if (student == null)
-              {
-                 ViewBag.ConcurrencyErrorMessage = "The record you attempted to delete "
-                     + "was deleted by another user after you got the original values. "
-                     + "Click the Back to List hyperlink.";
-              }
-              else
-              {
-                 ViewBag.ConcurrencyErrorMessage = "The record you attempted to delete "
-                     + "was modified by another user after you got the original values. "
-                     + "The delete operation was canceled and the current values in the "
-                     + "database have been displayed. If you still want to delete this "
-                     + "record, click the Delete button again. Otherwise "
-                     + "click the Back to List hyperlink.";
-              }
-           }
-
-           return View(student);
-        }
-
-        //
-        // POST: /Student/DeletePeronalInfo/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeletePersonalInfo(StudentModel student)
-        {
-           try
-           {
-              db.Entry(student).State = EntityState.Deleted;
-              db.SaveChanges();
-              return RedirectToAction("MyInfo");
-           }
-           catch (DbUpdateConcurrencyException)
-           {
-              return RedirectToAction("DeletePersonalInfo", new { concurrencyError = true });
-           }
-           catch (DataException /* dex */)
-           {
-              //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
-              ModelState.AddModelError(string.Empty, "Unable to delete. Try again, and if the problem persists contact your system administrator.");
-              return View(student);
-           }
-        }
-
-        //
-        // Get: /Student/DeleteFinancialInfo
-        public ActionResult DeleteFinancialInfo(int id, bool? concurrencyError)
-        {
-            StudentFinancialModel financial = db.FinancialInfoProfiles.Find(id);
-
-            if (concurrencyError.GetValueOrDefault())
-            {
-                if (financial == null)
-                {
-                    ViewBag.ConcurrencyErrorMessage = "The record you attempted to delete "
-                        + "was deleted by another user after you got the original values. "
-                        + "Click the Back to List hyperlink.";
-                }
-                else
-                {
-                    ViewBag.ConcurrencyErrorMessage = "The record you attempted to delete "
-                        + "was modified by another user after you got the original values. "
-                        + "The delete operation was canceled and the current values in the "
-                        + "database have been displayed. If you still want to delete this "
-                        + "record, click the Delete button again. Otherwise "
-                        + "click the Back to List hyperlink.";
-                }
-            }
-
-            return View(financial);
-        }
-
-        //
-        // POST: /Student/DeleteFinancialInfo/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteFinancialInfo(StudentFinancialModel financial)
-        {
-            try
-            {
-                db.Entry(financial).State = EntityState.Deleted;
-                db.SaveChanges();
-                return RedirectToAction("MyInfo");
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return RedirectToAction("DeleteFinancialInfo", new { concurrencyError = true });
-            }
-            catch (DataException /* dex */)
-            {
-                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
-                ModelState.AddModelError(string.Empty, "Unable to delete. Try again, and if the problem persists contact your system administrator.");
-                return View(financial);
-            }
-        }
 
         /*
         // Get: /Student/DeleteAcademicInfo
@@ -314,7 +209,7 @@ namespace HillsboroughEducation.Controllers
             }
         } */
 
-        //
+        /*
         // GET: /Student/EditPersonalInfo/5
 
         public ActionResult EditPersonalInfo(int id = 0)
@@ -414,7 +309,7 @@ namespace HillsboroughEducation.Controllers
                     + "have been displayed. If you still want to edit this record, click "
                     + "the Save button again. Otherwise click the Back to List hyperlink.");
             }
-            catch (DataException /* dex */)
+            catch (DataException  dex )
             {
                 //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
@@ -422,7 +317,7 @@ namespace HillsboroughEducation.Controllers
 
          //   ViewBag.UserID = new SelectList(db.StudentProfiles, "UserID ", "FirstName", student.UserID);
             return View(student);
-        }
+        }*/
 
         //
         // GET: /Student/Scholarship
