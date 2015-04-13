@@ -3,32 +3,58 @@
 @{
     ViewBag.Title = "MyInfo";
 }
+
+<script>
+    $m = jQuery.noConflict();
+</script>
+<script type="text/javascript">
+    $m(document).ready(function () {
+        $m('#tabs').tabs();
+    });
+</script>
+
 <body>
-          <div id="personal">
-       <h2>Personal Information</h2>
+    <div id="tabs">
+        <ul>
+            <li><a href="#personal">Personal Information</a></li>
+            <li><a href="#financial">Financial Information</a></li>
+            <li><a href="#academic">Academic Criteria</a></li>
+            <li><a href="#scores">Test Scores</a></li>
+            <li><a href="#question">Questionnaire</a></li>
+            <li><a href="#essay">Student Essay Questions</a></li>
+            <li><a href="#documents">Documents</a></li>
+            <li><a href="#application">Scholarship Application</a></li>
+        </ul>
+
+        <div id="personal">
+            <h2>Personal Information</h2>
             <section>
                 First Name:
                 @Html.DisplayFor(model => model.FirstName)
-            </section>
-            <section>
-                Social Security #:
-                @Html.DisplayText("model => model.SocialSecurity")
             </section>
             <section>
                 Last Name:
                 @Html.DisplayFor(model => model.LastName)
             </section>
             <section>
+                Social Security #:
+                @Html.DisplayFor(model => model.SocialSecurity)
+            </section>
+            <section>
+                Student ID:
+                @Html.DisplayFor(model => model.StudentNumber)
+            </section>
+            <section>
                 Country:
-                @Html.DisplayText("model => model.Country")
+                @Html.DisplayFor(model => model.Country)
             </section>
             <section>
                 Gender:
-                @Html.DisplayText("model => model.Gender")
+                @Html.DisplayFor(model => model.Gender)
             </section>
             <section>
                 Ethnicity:
-                @Html.DisplayText("model => model.Ethnicity")
+                @Html.DisplayFor(model => model.Ethnicity)
             </section>
             <section>
                 Date of Birth:
@@ -36,50 +62,47 @@
             </section>
             <section>
                 Address:
-                @Html.DisplayText("model => model.Address")
+                @Html.DisplayFor(model => model.Address1)
+            </section>
+            <section>
+                Second Address:
+                @Html.DisplayFor(model => model.Address2)
             </section>
             <section>
                 City:
-                @Html.DisplayText("model => model.City")
+                @Html.DisplayFor(model => model.City)
             </section>
             <section>
                 State:
-                @Html.DisplayText("model => model.State")
+                @Html.DisplayFor(model => model.State)
             </section>
             <section>
                 County:
-                @Html.DisplayText("model => model.County")
+                @Html.DisplayFor(model => model.County)
             </section>
             <section>
                 Postal Code:
-                @Html.DisplayText("model => model.PostalCode")
-            </section>
-            <section>
-                School Student ID#:
-                @Html.DisplayText("model => model.StudentID")
-            </section>
-            <section>
-                Generated Student ID #:
-                @Html.DisplayFor(model => model.StudentNumber)
+                @Html.DisplayFor(model => model.PostalCode)
             </section>
             <section>
                 Home Phone:
-                @Html.DisplayText("model => model.HomepPhone")
+                @Html.DisplayFor(model => model.HomePhone)
             </section>
             <section>
                 Work Phone:
-                @Html.DisplayText("model => model.WorkPhone")
+                @Html.DisplayFor(model => model.WorkPhone)
             </section>
             <section>
                 Cell Phone:
-                @Html.DisplayText("model => model.CellPhone")
+                @Html.DisplayFor(model => model.CellPhone)
             </section>
             <section>
-                Email Address/Username:
+                Email Address(Username):
                 @Html.DisplayFor(model => model.UserName)
             </section>
+        </div>
 
-<div id="financial">
+        <div id="financial">
             <h2>Financial Information</h2>
             <section>
                 Adjusted Gross Income:
@@ -173,11 +196,9 @@
             <h2>Documents</h2>
         </div>
 
-        <p>
-            @Html.ActionLink("Back to List", "MyInfo", "Student", "", "")
-            <a href="#tabs">Top</a>
+        <p align="right">
+            <a href="#tabs"><b>Back to Top</b></a>
         </p>
     </div>
 </body>
 
-        
