@@ -16,6 +16,7 @@ namespace HillsboroughEducation.Controllers
     {
         private UsersContext db = new UsersContext();
         private ScholarshipContext dbScholarship = new ScholarshipContext();
+        private ReviewerContext dbReviewer = new ReviewerContext();
 
         //
         // GET: /Admin/Index
@@ -314,9 +315,51 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Admin/Reviewer
-        public ActionResult Reviewer()
+        public ActionResult Reviewer(String sortOrder, String searchString)
         {
-            return View();
+            ViewBag.LastNameSortParam = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstName" ? "firstName_desc" : "FirstName";
+            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
+            var reviewers = from r in dbReviewer.ReviewerProfiles
+                           select r;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                reviewers = reviewers.Where(s => (s.LAST_NAME.Contains(searchString)) ||
+                                            (s.FIRST_NAME.Contains(searchString)) ||
+                                            (s.ACADEMIC_YEAR.Contains(searchString))).OrderBy(s => s.LAST_NAME);
+            }
+
+            #region Sorting
+            switch (sortOrder)
+            {
+                case "lastName_desc":
+                    reviewers = reviewers.OrderByDescending(r => r.LAST_NAME);
+                    break;
+
+                case "FirstName":
+                    reviewers = reviewers.OrderBy(s => s.FIRST_NAME);
+                    break;
+
+                case "firstName_desc":
+                    reviewers = reviewers.OrderByDescending(r => r.FIRST_NAME);
+                    break;
+
+                case "AcademicYear":
+                    reviewers = reviewers.OrderBy(r => r.ACADEMIC_YEAR);
+                    break;
+
+                case "academicYear_desc":
+                    reviewers = reviewers.OrderByDescending(r => r.ACADEMIC_YEAR);
+                    break;
+
+                default:
+                    reviewers = reviewers.OrderBy(r => r.LAST_NAME);
+                    break;
+            }
+            #endregion
+
+            return View(reviewers.ToList());
         }
 
         //

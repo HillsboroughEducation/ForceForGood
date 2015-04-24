@@ -23,85 +23,86 @@
             <li><a href="#question">Questionnaire</a></li>
             <li><a href="#essay">Student Essay Questions</a></li>
             <li><a href="#documents">Documents</a></li>
-        </ul>    
+            <li><a href="#application">Scholarship Application</a></li>
+        </ul>
 
-<div id="Personal">
-    <h2>Personal Information</h2>
-    <section>
-        First Name:
-        @Html.DisplayFor(model => model.FirstName)
-    </section>
-    <section>
-        Last Name:
-        @Html.DisplayFor(model => model.LastName)
-    </section>
-    <section>
-        Social Security #:
-        @Html.DisplayFor(model => model.SocialSecurity)
-    </section>
-    <section>
-        Student ID:
-        @Html.DisplayFor(model => model.StudentNumber)
-    </section>
-    <section>
-        Country:
-        @Html.DisplayFor(model => model.Country)
-    </section>
-    <section>
-        Gender:
-        @Html.DisplayFor(model => model.Gender)
-    </section>
-    <section>
-        Ethnicity:
-        @Html.DisplayFor(model => model.Ethnicity)
-    </section>
-    <section>
-        Date of Birth:
-        @Html.DisplayFor(model => model.BirthDate)
-    </section>
-    <section>
-        Address:
-        @Html.DisplayFor(model => model.Address1)
-    </section>
-    <section>
-        Second Address:
-        @Html.DisplayFor(model => model.Address2)
-    </section>
-    <section>
-        City:
-        @Html.DisplayFor(model => model.City)
-    </section>
-    <section>
-        State:
-        @Html.DisplayFor(model => model.State)
-    </section>
-    <section>
-        County:
-        @Html.DisplayFor(model => model.County)
-    </section>
-    <section>
-        Postal Code:
-        @Html.DisplayFor(model => model.PostalCode)
-    </section>
-    <section>
-        Home Phone:
-        @Html.DisplayFor(model => model.HomePhone)
-    </section>
-    <section>
-        Work Phone:
-        @Html.DisplayFor(model => model.WorkPhone)
-    </section>
-    <section>
-        Cell Phone:
-        @Html.DisplayFor(model => model.CellPhone)
-    </section>
-    <section>
-        Email Address(Username):
-        @Html.DisplayFor(model => model.UserName)
-    </section>
-</div>
+        <div id="personal">
+            <h2>Personal Information</h2>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.FirstName)
+            </section>
+            <section>
+                Last Name:
+                @Html.DisplayFor(model => model.LastName)
+            </section>
+            <section>
+                Social Security #:
+                @Html.DisplayFor(model => model.SocialSecurity)
+            </section>
+            <section>
+                Student ID:
+                @Html.DisplayFor(model => model.StudentNumber)
+            </section>
+            <section>
+                Country:
+                @Html.DisplayFor(model => model.Country)
+            </section>
+            <section>
+                Gender:
+                @Html.DisplayFor(model => model.Gender)
+            </section>
+            <section>
+                Ethnicity:
+                @Html.DisplayFor(model => model.Ethnicity)
+            </section>
+            <section>
+                Date of Birth:
+                @Html.DisplayFor(model => model.BirthDate)
+            </section>
+            <section>
+                Address:
+                @Html.DisplayFor(model => model.Address1)
+            </section>
+            <section>
+                Second Address:
+                @Html.DisplayFor(model => model.Address2)
+            </section>
+            <section>
+                City:
+                @Html.DisplayFor(model => model.City)
+            </section>
+            <section>
+                State:
+                @Html.DisplayFor(model => model.State)
+            </section>
+            <section>
+                County:
+                @Html.DisplayFor(model => model.County)
+            </section>
+            <section>
+                Postal Code:
+                @Html.DisplayFor(model => model.PostalCode)
+            </section>
+            <section>
+                Home Phone:
+                @Html.DisplayFor(model => model.HomePhone)
+            </section>
+            <section>
+                Work Phone:
+                @Html.DisplayFor(model => model.WorkPhone)
+            </section>
+            <section>
+                Cell Phone:
+                @Html.DisplayFor(model => model.CellPhone)
+            </section>
+            <section>
+                Email Address(Username):
+                @Html.DisplayFor(model => model.UserName)
+            </section>
+        </div>
 
-<div id="financial">
+        <div id="financial">
             <h2>Financial Information</h2>
             <section>
                 Adjusted Gross Income:
@@ -113,7 +114,7 @@
             </section>
         </div>
 
-<div id="academic">
+        <div id="academic">
             <h2>Academic Information</h2>
             <section>
                 Class Year:
@@ -195,11 +196,9 @@
             <h2>Documents</h2>
         </div>
 
-        <p>
-            @Html.ActionLink("Back to List", "MyInfo", "Student", "", "")
-            <a href="#tabs">Top</a>
+        <p align="right">
+            <a href="#tabs"><b>Back to Top</b></a>
         </p>
     </div>
 </body>
 
-        

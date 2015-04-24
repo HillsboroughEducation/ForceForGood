@@ -1,5 +1,51 @@
-﻿@{
-    ViewBag.Title = "Reviewer";
-}
+﻿@model IEnumerable<HillsboroughEducation.Models.Reviewers>
+<!DOCTYPE html>
 
-<h2>Manage Reviewer</h2>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reviewer</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Search by: Last name, First name, or Academic Year <br />
+            @Html.TextBox("SearchString")
+            <input type="submit" value="Submit" />
+        </p>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Last Name", "Student", new { sortOrder = ViewBag.LastNameSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("First Name", "Student", new { sortOrder = ViewBag.FirstNameSortParam })
+            </th>
+            <th>
+                @Html.ActionLink("Academic Year", "Student", new { sortOrder = ViewBag.AcademicYearSortParam })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LAST_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIRST_NAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ACADEMIC_YEAR)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "StudentInfo", new { id = item.REVIEWER_ID })
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
