@@ -390,7 +390,6 @@
     <Content Include="Views\Student\CreateAcademicInfo.cshtml" />
     <Content Include="Views\Admin\CreateReviewer.cshtml" />
     <Content Include="Views\Admin\DonorInfo.cshtml" />
-    <Content Include="Views\Admin\CreateDonor.cshtml" />
     <Content Include="Views\Admin\EditDonor.cshtml" />
   </ItemGroup>
   <ItemGroup>

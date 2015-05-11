@@ -1,0 +1,42 @@
+﻿@model HillsboroughEducation.Models.Donors
+
+@{
+    ViewBag.Title = "DonorInfo";
+}
+
+<h2>DonorInfo</h2>
+
+<fieldset>
+    <legend>Donors</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NAME)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CITY)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CITY)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.STATE)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.STATE)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ZIP)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ZIP)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Donor", "Admin", "", "")
+</p>
