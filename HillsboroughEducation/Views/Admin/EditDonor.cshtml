@@ -1,0 +1,62 @@
+﻿@model HillsboroughEducation.Models.Donors
+
+@{
+    ViewBag.Title = "EditDonor";
+}
+
+<h2>EditDonor</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Donors</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NAME)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NAME)
+            @Html.ValidationMessageFor(model => model.NAME)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CITY)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CITY)
+            @Html.ValidationMessageFor(model => model.CITY)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.STATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.STATE)
+            @Html.ValidationMessageFor(model => model.STATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ZIP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ZIP)
+            @Html.ValidationMessageFor(model => model.ZIP)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

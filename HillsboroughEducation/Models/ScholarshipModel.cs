@@ -53,7 +53,6 @@ namespace HillsboroughEducation.Models
         [Display(Name = "Amount")]
         public int Amount { get; set; }
 
-        [Required]
         [Display(Name = "Total Scholarship Funds")]
         public float TotalScholarshipFunds { get; set; }
 
@@ -69,11 +68,11 @@ namespace HillsboroughEducation.Models
 
         [Required]
         [Display(Name = "Number Awarded")]
-        public int NumberAwared { get; set; }
+        public int NumberAwarded { get; set; }
 
         [Required]
         [Display(Name = "Amount Awarded")]
-        public float AmountAwarededPerRecipient { get; set; }
+        public float AmountAwardedPerRecipient { get; set; }
 
         [Required]
         [Display(Name = "Number of Installments")]
