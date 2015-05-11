@@ -44,15 +44,15 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
-        // GET: /Reiewer/MyInfo
-        public ActionResult MyInfo(int id = 1)
+        // GET: /Reiewer/ReviewerInfo
+        public ActionResult ReviewerInfo(int id = 1)
         {
-            StudentModel Reviewerinfo = db.StudentProfiles.Find(id);
-            if (Reviewerinfo == null)
+            StudentModel Reviewer = db.StudentProfiles.Find(id);
+            if (Reviewer == null)
             {
                 return HttpNotFound();
             }
-            return View(Reviewerinfo);
+            return View(Reviewer);
         }
 
         //
