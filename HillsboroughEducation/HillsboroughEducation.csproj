@@ -381,7 +381,7 @@
     <Content Include="Views\Reviewer\Index.cshtml" />
     <Content Include="Views\Shared\_ReviewerLayout.cshtml" />
     <Content Include="Views\Reviewer\ReviewApplications.cshtml" />
-    <Content Include="Views\Reviewer\MyInfo.cshtml" />
+    <Content Include="Views\Reviewer\ReviewerInfo.cshtml" />
     <Content Include="Views\Reviewer\Dashboard.cshtml" />
     <Content Include="Views\Admin\CreateScholarship.cshtml" />
     <Content Include="Views\Admin\CreateAdmin.cshtml" />
