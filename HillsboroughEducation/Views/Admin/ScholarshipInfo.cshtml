@@ -1,0 +1,51 @@
+﻿@model HillsboroughEducation.Models.ScholarshipModel
+
+<!DOCTYPE html>
+
+<html>
+<body>
+
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScholarshipName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScholarshipType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfApplicants)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.ScholarshipName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ScholarshipType)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.AcademicYear)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NumOfApplicants)
+            </td>
+            <td>
+                $@Html.DisplayFor(model => model.Amount)
+            </td>
+        </tr>
+    </table>
+    <p align="right">
+        <b>
+            @Html.ActionLink("Back to List", "Scholarship", "Admin", "", "")
+        </b>
+    </p>
+</body>
+</html>

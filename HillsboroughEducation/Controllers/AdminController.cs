@@ -17,6 +17,7 @@ namespace HillsboroughEducation.Controllers
         private UsersContext db = new UsersContext();
         private ScholarshipContext dbScholarship = new ScholarshipContext();
         private ReviewerContext dbReviewer = new ReviewerContext();
+        private DonorContext dbDonor = new DonorContext();
 
         //
         // GET: /Admin/Index
@@ -362,11 +363,160 @@ namespace HillsboroughEducation.Controllers
             return View(reviewers.ToList());
         }
 
-        //
-        // GET: /Admin/Donor
-        public ActionResult Donor()
+        // GET: /Admin/CreateReviewer
+        public ActionResult CreateReviewer()
         {
             return View();
+        }
+
+        // POST: /Admin/CreateReviewer
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateReviewer(Reviewers reviewer)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbReviewer.ReviewerProfiles.Add(reviewer);
+                    dbReviewer.SaveChanges();
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(reviewer);
+        }
+
+        //
+        // GET: /Admin/Donor
+        public ActionResult Donor(String sortOrder, String searchString)
+        {
+            ViewBag.DonorIdSortParam = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+            ViewBag.DonorNameSortParam = sortOrder == "name" ? "name_desc" : "name";
+
+            var donors = from d in dbDonor.DonorProfiles
+                            select d;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                donors = donors.Where(s => (s.NAME.Contains(searchString))).OrderBy(s => s.NAME);
+            }
+
+            #region Sorting
+            switch (sortOrder)
+            {
+                case "id_desc":
+                    donors = donors.OrderByDescending(d => d.ID);
+                    break;
+
+                case "name":
+                    donors = donors.OrderBy(d => d.NAME);
+                    break;
+
+                case "name_desc":
+                    donors = donors.OrderByDescending(d => d.NAME);
+                    break;
+
+                default:
+                    donors = donors.OrderBy(d => d.ID);
+                    break;
+            }
+            #endregion
+
+            return View(donors.ToList());
+        }
+
+        public ActionResult DonorInfo(int id = 1)
+        {
+            Donors donor = dbDonor.DonorProfiles.Find(id);
+
+            if (donor == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(donor);
+        }
+
+        //
+        // GET:  /Admin/CreateDonor
+        public ActionResult CreateDonor()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Admin/CreateDonor
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateDonor(Donors donor)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbDonor.DonorProfiles.Add(donor);
+                    dbDonor.SaveChanges();
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(donor);
+        }
+
+        //
+        // GET:  /Admin/EditDonor
+        public ActionResult EditDonor(int id = 1)
+        {
+            Donors donor = dbDonor.DonorProfiles.Find(id);
+
+            if (donor == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(donor);
+        }
+
+
+        //
+        // POST: /Admin/EditDonor
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDonor(Donors donor)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbDonor.Entry(donor).State = EntityState.Modified;
+                    dbDonor.SaveChanges();
+                    return RedirectToAction("Index", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(donor);
         }
 
     }
