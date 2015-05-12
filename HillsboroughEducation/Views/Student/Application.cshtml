@@ -1,5 +1,60 @@
-﻿@{
-    ViewBag.Title = "Applications";
+﻿@using System.Web.Helpers;
+@model IEnumerable<HillsboroughEducation.Models.ScholarshipModel>
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "Scholarship", rowsPerPage: 20);
 }
+        <div id="tableBox" style="width:800px">
+        <div class="Title">My Applications
+        </div>
+        <div id="searchParameters" style="width:778px;background:#FFFFFF;padding:10px; border:1px solid #000000">
+            <h3>Search Parameters</h3><br />
+            <form method="get">
+                <div>
+                    <div style="padding-bottom:5px">
+                      @using (Html.BeginForm())
+{
+    <p>
+        Search by: Scholarship Name, Type, or Application Status <br />
+        @Html.TextBox("SearchString")
+         <input id="searchSubmit" type="submit" value="Search" tabindex="7" style="margin-left:200px"/>
+         <input id="searchReset" type="submit" value="Clear" tabindex="8" style="margin-left:20px"/>
+    </p>
+}
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Scholarship Name", "Scholarship", new { sortOrder = ViewBag.ScholarShipNameSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Scholarship Type", "Scholarship", new { sortOrder = ViewBag.ScholarShipTypeSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Application Status", "Scholarship", new { sortOrder = ViewBag.AcademicYearSortParam })
+        </th>
 
-<h2>Applications</h2>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScholarshipName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScholarshipType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AcademicYear)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "ScholarshipDetails", new { id = item.ScholarshipId })
+            </td>
+        </tr>
+    }
+</table>             
+                    </div>
+                </div>
+            </form>
+        </div>
+            </div>

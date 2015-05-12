@@ -391,6 +391,10 @@
     <Content Include="Views\Admin\CreateReviewer.cshtml" />
     <Content Include="Views\Admin\DonorInfo.cshtml" />
     <Content Include="Views\Admin\EditDonor.cshtml" />
+    <Content Include="Views\Student\EditPersonalInfo.cshtml" />
+    <Content Include="Views\Admin\CreateDonor.cshtml" />
+    <Content Include="Views\Student\EditFinancialInfo.cshtml" />
+    <Content Include="Views\Student\EditAcademicInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

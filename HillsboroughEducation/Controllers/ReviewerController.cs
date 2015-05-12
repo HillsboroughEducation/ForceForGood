@@ -16,6 +16,27 @@ namespace HillsboroughEducation.Controllers
     {
         private UsersContext db = new UsersContext();
         private ScholarshipContext dbScholarship = new ScholarshipContext();
+        private ReviewerContext dbReviewer = new ReviewerContext();
+
+        private IEnumerable<ModelError> GetRealErrors(IEnumerable<KeyValuePair<string, ModelState>> modelStateDictionary)
+        {
+            var errorMessages = new List<ModelError>();
+            foreach (var keyValuePair in modelStateDictionary)
+            {
+                if (keyValuePair.Value.Errors.Count > 0)
+                {
+                    foreach (var error in keyValuePair.Value.Errors)
+                    {
+                        if (!error.ErrorMessage.Contains("Info"))
+                        {
+                            errorMessages.Add(error);
+                        }
+                    }
+                }
+
+            }
+            return errorMessages;
+        }
 
         //
         // GET: /Reviewer/Index
@@ -44,15 +65,76 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
-        // GET: /Reiewer/ReviewerInfo
-        public ActionResult ReviewerInfo(int id = 1)
+        // GET: /Reviewer/ReviewerInfo
+        public ActionResult ReviewerInfo()
         {
-            StudentModel Reviewer = db.StudentProfiles.Find(id);
-            if (Reviewer == null)
+            return View();
+        }
+
+        //
+        //POST: /Reviewer/ReviewerInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReviewerInfo(Reviewers reviewer)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbReviewer.ReviewerProfiles.Add(reviewer);
+                    dbReviewer.SaveChanges();
+                    return RedirectToAction("Index", "Reviewer");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(reviewer);
+        }
+
+        //
+        //GET: /Reviewer/EditReviewerInfo
+        public ActionResult EditReviewerInfo(int id = 1)
+        {
+            Reviewers reviewer = dbReviewer.ReviewerProfiles.Find(id);
+
+            if (reviewer == null)
             {
                 return HttpNotFound();
             }
-            return View(Reviewer);
+
+            return View(reviewer);
+        }
+
+        //
+        //POST: /Reviewer/EditReviewerInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditReviewerInfo(Reviewers reviewer)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbReviewer.Entry(reviewer).State = EntityState.Modified;
+                    dbReviewer.SaveChanges();
+                    return RedirectToAction("Index", "Reviewer");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(reviewer);
         }
 
         //

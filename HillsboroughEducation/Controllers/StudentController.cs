@@ -112,6 +112,46 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
+        // GET: /Student/EditPersonalInfo
+        public ActionResult EditPersonalInfo(int id = 1)
+        {
+            StudentModel student = dbStudent.StudentProfiles.Find(id);
+
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(student);
+        }
+
+        //
+        // POST: /Student/EditPersonalInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPersonalInfo(StudentModel student)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbStudent.Entry(student).State = EntityState.Modified;
+                    dbStudent.SaveChanges();
+                    return RedirectToAction("Index", "Student");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(student);
+        }
+
+        //
         // GET: /Student/CreateFinancialInfo
         public ActionResult CreateFinancialInfo()
         {
@@ -144,6 +184,46 @@ namespace HillsboroughEducation.Controllers
             return View(financial);
         }
 
+        //
+        // GET: /Student/EditFinancialInfo
+        public ActionResult EditFinancialInfo(int id = 1)
+        {
+            StudentFinancialModel Financial = dbFinancial.FinancialInfoProfiles.Find(id);
+
+            if (Financial == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(Financial);
+        }
+
+        //
+        // POST: /Student/EditFinancialInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditFinancialInfo(StudentFinancialModel student)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbStudent.Entry(student).State = EntityState.Modified;
+                    dbStudent.SaveChanges();
+                    return RedirectToAction("Index", "Student");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(student);
+        }
+
         // GET: /Student/CreateAcademicInfo
         public ActionResult CreateAcademicInfo()
         {
@@ -154,15 +234,15 @@ namespace HillsboroughEducation.Controllers
         // POST: /Student/CreateAcademicInfo
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAcademicInfo(Criteria Academic)
+        public ActionResult CreateAcademicInfo(ScholarshipModel Academic)
         {
             var errors = GetRealErrors(ModelState);
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dbCriteria.CriteriaProfiles.Add(Academic);
-                    dbCriteria.SaveChanges();
+                    dbScholarship.ScholarshipProfiles.Add(Academic);
+                    dbScholarship.SaveChanges();
                     return RedirectToAction("Index", "MyInfo");
                 }
             }
@@ -174,7 +254,47 @@ namespace HillsboroughEducation.Controllers
             }
 
             return View(Academic);
-        } 
+        }
+
+        //
+        // GET: /Student/EditAcademicInfo
+        public ActionResult EditAcademicInfo(int id = 1)
+        {
+            StudentModel student = dbStudent.StudentProfiles.Find(id);
+
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(student);
+        }
+
+        //
+        // POST: /Student/EditAcademicInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAcademicInfo(StudentModel student)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbStudent.Entry(student).State = EntityState.Modified;
+                    dbStudent.SaveChanges();
+                    return RedirectToAction("Index", "Student");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(student);
+        }
 
         //
         // GET: /Student/Scholarship

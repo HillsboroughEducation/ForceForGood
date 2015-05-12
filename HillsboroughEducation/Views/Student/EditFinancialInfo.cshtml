@@ -1,8 +1,10 @@
 ﻿@model HillsboroughEducation.Models.StudentFinancialModel
 
 @{
-    ViewBag.Title = "FinancialInfo";
+    ViewBag.Title = "EditFinancialInfo";
 }
+
+<h2>EditFinancialInfo</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -27,13 +29,13 @@
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>  
 }
 
 <div>
-    @Html.ActionLink("Back to my Financial Info", "MyInfo")
+    @Html.ActionLink("Save Changes", "MyInfo")
 </div>
 
 @section Scripts {

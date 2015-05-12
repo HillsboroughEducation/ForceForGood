@@ -1,0 +1,43 @@
+﻿@model HillsboroughEducation.Models.ScholarshipModel
+
+@{
+    ViewBag.Title = "EditAcademicInfo";
+}
+
+<h2>EditAcademicInfo</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+ <fieldset>
+        <legend>Academic Information</legend>
+        <div class="editor-label">
+            @Html.Display("Which of the following types of student most closely matches you?")
+        </div>
+        <div class="editor-field">
+            @Html.Display("model => model.AdjustedGrossIncome")
+            @Html.Display("model => model.AdjustedGrossIncome")
+        </div>
+
+        <div class="editor-label">
+            @Html.Display("Are you a hillsborough county Public Schools permanent CTAE instr")
+        </div>
+        <div class="editor-field">
+            @Html.Display("model => model.NumberInHousehold")
+            @Html.Display("model => model.NumberInHousehold")
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>  
+}
+
+<div>
+    @Html.ActionLink("Save Changes", "MyInfo")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

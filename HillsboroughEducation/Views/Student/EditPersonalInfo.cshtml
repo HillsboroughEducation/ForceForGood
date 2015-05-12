@@ -1,16 +1,16 @@
 ﻿@model HillsboroughEducation.Models.StudentModel
 
 @{
-    ViewBag.Title = "CreatePersonalInfo";
+    ViewBag.Title = "EditPersonalInfo";
 }
 
-<h2>CreatePersonalInfo</h2>
+<h2>EditPersonalInfo</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
- <fieldset>
+    <fieldset>
         <legend>Personal Information</legend>
         <div class="editor-label">
             @Html.LabelFor(model => model.AcademicYear)
@@ -161,13 +161,13 @@
             @Html.ValidationMessageFor(model => model.CellPhone)
         </div>
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Save" />
         </p>
     </fieldset>  
 }
 
 <div>
-    @Html.ActionLink("Back to my Personal Information", "MyInfo")
+    @Html.ActionLink("Save Changes", "MyInfo")
 </div>
 
 @section Scripts {
