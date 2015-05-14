@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HillsboroughEducation.Models.Criteria>
+@{
+    ViewBag.Title = "Criteria";
+}
+
+@using (Html.BeginForm())
+{
+
+    <h2>@Html.ActionLink("Add new criteria", "CreateCriteria", "Admin")</h2>
+
+    <p>
+        Search by: Criteria<br />
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Submit" />
+    </p>
+}
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Criteria ID", "Criteria", new { sortOrder = ViewBag.CriteriaIdSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Criteria Description", "Criteria", new { sortOrder = ViewBag.DescrSortParam })
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESCR)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "EditCriteria", new { id = item.ID })
+            </td>
+        </tr>
+    }
+</table>
+
