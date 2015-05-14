@@ -18,6 +18,7 @@ namespace HillsboroughEducation.Controllers
         private ScholarshipContext dbScholarship = new ScholarshipContext();
         private ReviewerContext dbReviewer = new ReviewerContext();
         private DonorContext dbDonor = new DonorContext();
+        private CriteriaContext dbCriteria = new CriteriaContext();
 
         //
         // GET: /Admin/Index
@@ -196,52 +197,57 @@ namespace HillsboroughEducation.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                scholarships = scholarships.Where(s => (s.ScholarshipName.Contains(searchString)) ||
-                                            (s.ScholarshipType.Contains(searchString)) || 
-                                            (s.AcademicYear.Contains(searchString))).OrderBy(s => s.ScholarshipName);
+                scholarships = scholarships.Where(s => (s.TITLE.Contains(searchString)) ||
+                                            (s.TYPE.Contains(searchString))).OrderBy(s => s.TITLE);
+
+                if (scholarships.Count() == 0)
+                {
+                    scholarships = (from s in dbScholarship.ScholarshipProfiles
+                                   select s).OrderBy(s => s.TITLE);
+                }
             }
 
             #region Sorting
             switch (sortOrder)
             {
                 case "scholarshipName_desc":
-                    scholarships = scholarships.OrderByDescending(s => s.ScholarshipName);
+                    scholarships = scholarships.OrderByDescending(s => s.TITLE);
                     break;
 
                 case "ScholarshipType":
-                    scholarships = scholarships.OrderBy(s => s.ScholarshipType);
+                    scholarships = scholarships.OrderBy(s => s.TYPE);
                     break;
 
                 case "scholarshipType_desc":
-                    scholarships = scholarships.OrderByDescending(s => s.ScholarshipType);
+                    scholarships = scholarships.OrderByDescending(s => s.TYPE);
                     break;
 
                 case "AcademicYear":
-                    scholarships = scholarships.OrderBy(s => s.AcademicYear);
+                    scholarships = scholarships.OrderBy(s => s.DATE_AVAILABLE.Year);
                     break;
 
                 case "academicYear_desc":
-                    scholarships = scholarships.OrderByDescending(s => s.AcademicYear);
+                    scholarships = scholarships.OrderByDescending(s => s.DATE_AVAILABLE.Year);
                     break;
 
                 case "NumOfApplicants":
-                    scholarships = scholarships.OrderBy(s => s.AcademicYear);
+                    scholarships = scholarships.OrderBy(s => s.AMOUNT_TYPE);
                     break;
 
                 case "numOfApplicants_desc":
-                    scholarships = scholarships.OrderByDescending(s => s.AcademicYear);
+                    scholarships = scholarships.OrderByDescending(s => s.AMOUNT_TYPE);
                     break;
 
                 case "Amount":
-                    scholarships = scholarships.OrderBy(s => s.AcademicYear);
+                    scholarships = scholarships.OrderBy(s => s.TOTAL_FUNDS);
                     break;
 
                 case "amount_desc":
-                    scholarships = scholarships.OrderByDescending(s => s.AcademicYear);
+                    scholarships = scholarships.OrderByDescending(s => s.TOTAL_FUNDS);
                     break;
 
                 default:
-                    scholarships = scholarships.OrderBy(s => s.ScholarshipName);
+                    scholarships = scholarships.OrderBy(s => s.TITLE);
                     break;
             }
             #endregion
@@ -281,7 +287,7 @@ namespace HillsboroughEducation.Controllers
                 {
                     dbScholarship.ScholarshipProfiles.Add(scholarship);
                     dbScholarship.SaveChanges();              
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Scholarship", "Admin");
                 }
             }
             catch (DataException dex)
@@ -381,7 +387,7 @@ namespace HillsboroughEducation.Controllers
                 {
                     dbReviewer.ReviewerProfiles.Add(reviewer);
                     dbReviewer.SaveChanges();
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Reviewer", "Admin");
                 }
             }
             catch (DataException dex)
@@ -465,7 +471,7 @@ namespace HillsboroughEducation.Controllers
                 {
                     dbDonor.DonorProfiles.Add(donor);
                     dbDonor.SaveChanges();
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Donor", "Admin");
                 }
             }
             catch (DataException dex)
@@ -506,7 +512,7 @@ namespace HillsboroughEducation.Controllers
                 {
                     dbDonor.Entry(donor).State = EntityState.Modified;
                     dbDonor.SaveChanges();
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Donor", "Admin");
                 }
             }
             catch (DataException dex)
@@ -517,6 +523,119 @@ namespace HillsboroughEducation.Controllers
             }
 
             return View(donor);
+        }
+
+        //
+        // GET:  /Admin/Criteria
+        public ActionResult Criteria(String sortOrder, String searchString)
+        {
+            ViewBag.CriteriaIdSortParam = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+            ViewBag.DescrSortParam = sortOrder == "descr" ? "descr_desc" : "descr";
+
+            var criterias = from c in dbCriteria.CriteriaProfiles
+                         select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                criterias = criterias.Where(s => (s.DESCR.Contains(searchString))).OrderBy(s => s.DESCR);
+            }
+
+            #region Sorting
+            switch (sortOrder)
+            {
+                case "id_desc":
+                    criterias = criterias.OrderByDescending(c => c.ID);
+                    break;
+
+                case "descr":
+                    criterias = criterias.OrderBy(c => c.DESCR);
+                    break;
+
+                case "descr_desc":
+                    criterias = criterias.OrderByDescending(c => c.DESCR);
+                    break;
+
+                default:
+                    criterias = criterias.OrderBy(c => c.ID);
+                    break;
+            }
+            #endregion
+
+            return View(criterias.ToList());
+        }
+
+        //
+        // GET:  /Admin/CreateCriteria
+        public ActionResult CreateCriteria()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Admin/CreateCriteria
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCriteria(Criteria criteria)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbCriteria.CriteriaProfiles.Add(criteria);
+                    dbCriteria.SaveChanges();
+                    return RedirectToAction("Criteria", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(criteria);
+        }
+
+        //
+        // GET:  /Admin/EditCriteria
+        public ActionResult EditCriteria(int id = 1)
+        {
+            Criteria criteria = dbCriteria.CriteriaProfiles.Find(id);
+
+            if (criteria == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(criteria);
+        }
+
+
+        //
+        // POST: /Admin/EditCriteria
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCriteria(Criteria criteria)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbCriteria.Entry(criteria).State = EntityState.Modified;
+                    dbCriteria.SaveChanges();
+                    return RedirectToAction("Criteria", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(criteria);
         }
 
     }

@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace HillsboroughEducation
+namespace HillsboroughEducation.Models
 {
 
-    public partial class Criteria
+    public class CriteriaContext : DbContext
     {
-        public long SCHL_SEQ { get; set; }
-        public string DESCR { get; set; }
-        public bool APPLICATION_IND { get; set; }
-        public bool REQUIRED { get; set; }
-        public bool ACTIVE { get; set; }
+        public CriteriaContext()
+            : base("DefaultConnection")
+        {
+        }
+        public DbSet<Criteria> CriteriaProfiles { get; set; }
+    }
 
-        public virtual Scholarships Scholarships { get; set; }
+    [Table("Criteria")]
+    public class Criteria
+    {
+        [Key]
+        public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Criteria")]
+        public string DESCR { get; set; }
+
+        //public virtual Scholarships Scholarships { get; set; }
     }
 }
