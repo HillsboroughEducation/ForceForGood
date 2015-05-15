@@ -11,7 +11,7 @@ using System.Web.Security;
 
 namespace HillsboroughEducation.Controllers
 {
-    [Authorize(Roles = "Reviewer")]
+ //   [Authorize(Roles = "Reviewer")]
     public class ReviewerController : Controller
     {
         private UsersContext db = new UsersContext();
@@ -109,6 +109,39 @@ namespace HillsboroughEducation.Controllers
             }
 
             return View(reviewer);
+        }
+
+        //
+        //POST: /Reviewer/CreateReviewerInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateReviewerInfo(Reviewers reviewer)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbReviewer.Entry(reviewer).State = EntityState.Modified;
+                    dbReviewer.SaveChanges();
+                    return RedirectToAction("Index", "Reviewer");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(reviewer);
+        }
+
+        //
+        //GET: /Reviewer/CreateReviewerInfo
+        public ActionResult CreateReviewerInfo()
+        {
+            return View();
         }
 
         //
