@@ -17,130 +17,101 @@ namespace HillsboroughEducation.Models
         public DbSet<ScholarshipModel> ScholarshipProfiles { get; set; }
     }
    
-    [Table("ScholarshipProfile")]
+    [Table("Scholarships")]
     public class ScholarshipModel
     {
 
         [Key]
-        public int ScholarshipId { get; set; }
+        public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Scholarship Name")]
-        public string ScholarshipName { get; set; }
+        [Display(Name = "Title")]
+        public string TITLE { get; set; }
+
+        public string DESCR { get; set; }
 
         [Required]
-        [Display(Name = "Scholarship Description")]
-        public string ScholarshipDescription { get; set; }
+        [Display(Name = "Type")]
+        public string TYPE { get; set; }
 
         [Required]
-        [Display(Name = "Scholarship Type")]
-        public string ScholarshipType { get; set; }
+        [Display(Name = "Date")]
+        public System.DateTime DATE_AVAILABLE { get; set; }
 
         [Required]
-        [Display(Name = "Academic Year")]
-        public string AcademicYear { get; set; }
-
-        [Display(Name = "Number of Applicants")]
-        public int NumOfApplicants { get; set; }
-
-        //NEEDS DATETIME
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Date Available")] 
-        public string DateAvailable { get; set; }
+        [Display(Name = "Applicant Amount")]
+        public string AMOUNT_TYPE { get; set; }
 
         [Required]
-        [Display(Name = "Amount")]
-        public int Amount { get; set; }
-
-        [Display(Name = "Total Scholarship Funds")]
-        public float TotalScholarshipFunds { get; set; }
+        [Display(Name = "Total Funds")]
+        public long TOTAL_FUNDS { get; set; }
 
         [Required]
-        [Display(Name = "Length of Scholarship")]
-        public string LengthOfScholarship { get; set; }
+        [Display(Name = "Length")]
+        public int LENGTH { get; set; }
 
-        //NEEDS DATETIME
         [Required]
-        [DataType(DataType.Date)]
         [Display(Name = "Deadline")]
-        public string Deadline { get; set; }
+        public System.DateTime DEADLINE { get; set; }
 
         [Required]
         [Display(Name = "Number Awarded")]
-        public int NumberAwarded { get; set; }
+        public int NUMBER_AWARDED { get; set; }
 
         [Required]
-        [Display(Name = "Amount Awarded")]
-        public float AmountAwardedPerRecipient { get; set; }
+        [Display(Name = "Amount Per Recipient")]
+        public int AMOUNT_PER_RECIPIENT { get; set; }
 
         [Required]
         [Display(Name = "Number of Installments")]
-        public int NumberofInstallments { get; set; }
+        public int NUMBER_INSTALLMENTS { get; set; }
 
         [Required]
         [Display(Name = "Amount Per Installment")]
-        public float AmountPerInstallment { get; set; }
+        public int AMOUNT_PER_INSTALLMENT { get; set; }
 
         [Required]
-        [Display(Name = "Credit Required")]
-        public string CreditsRequired { get; set; }
+        [Display(Name = "Credits Required")]
+        public int CREDITS_REQUIRED { get; set; }
 
-        [Required]
         [Display(Name = "GPA Required")]
-        public float GPARequired { get; set; }
+        public Nullable<int> GPA_REQUIRED { get; set; }
 
-        // NEES TO BE BOOL FOR NEXT TWO
-        [Required]
         [Display(Name = "Endowment")]
-        public string Endowment { get; set; }
+        public Nullable<bool> ENDOWMENT_IND { get; set; }
 
-        [Required]
-        [Display(Name = "Renewable")]
-        public string Renewable { get; set; }
+        [Display(Name = "Renew")]
+        public Nullable<bool> RENEW_IND { get; set; }
 
-        //NEEDS DATETIME
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Reviewer Start Date")]
-        public string ReviewerStartDate { get; set; }
+        [Display(Name = "Review Start Date")]
+        public Nullable<System.DateTime> REVIEW_START_DATE { get; set; }
 
-        //NEEDS DATETIME
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Reviewer End Date")]
-        public string ReviewerEndDate { get; set; }
+        [Display(Name = "Review End Date")]
+        public Nullable<System.DateTime> REVIEW_END_DATE { get; set; }
 
-        [Required]
-        [Display(Name = "Selection:")]
-        public string Selection { get; set; }
 
-        [Required]
-        [Display(Name = "Basis for Selection:")]
-        public string BasisForSelection { get; set; }
+        [Display(Name = "Selection")]
+        public string SELECTION { get; set; }
 
-        [Required]
-        [Display(Name = "Approved Use of Funds:")]
-        public string ApprovedUseOfFunds { get; set; }
+        [Display(Name = "Selection Basis")]
+        public string SELECTION_BASIS { get; set; }
 
-        [Required]
-        [Display(Name = "Disbursement:")]
-        public string Disbursement { get; set; }
+        [Display(Name = "Approved Use Funds")]
+        public string APPROVED_USE_FUNDS { get; set; }
 
-        [Required]
-        [Display(Name = "How Often Awarded:")]
-        public string HowOftenAwarded { get; set; }
+        [Display(Name = "Disbursement")]
+        public string DISBURSEMENT { get; set; }
+        public Nullable<int> AWARD_FREQUENCY { get; set; }
 
-        [Required]
         [Display(Name = "Presented")]
-        public string Presented { get; set; }
+        public string PRESENTED { get; set; }
 
-        [Required]
-        [Display(Name = "Script for the Awards Ceremonies:")]
-        public string ScriptForAwardCeremony { get; set; }
+        [Display(Name = "Award Script")]
+        public string AWARD_SCRIPT { get; set; }
 
-        [Required]
-        [Display(Name = "Comments:")]
-        public string Comments { get; set; }
+        [Display(Name = "Comments")]
+        public string COMMENTS { get; set; }
+
+        public virtual ICollection<Criteria> Criteria { get; set; }
     }
 }

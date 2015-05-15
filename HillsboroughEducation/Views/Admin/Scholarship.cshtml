@@ -9,7 +9,7 @@
     <h2>@Html.ActionLink("Create new scholarship", "CreateScholarship", "Admin")</h2>
 
     <p>
-        Search by: Scholarship Name, Type, or Academic Year <br />
+        Search by: Scholarship Name or Type <br />
         @Html.TextBox("SearchString")
         <input type="submit" value="Submit" />
     </p>
@@ -39,22 +39,22 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ScholarshipName)
+                @Html.DisplayFor(modelItem => item.TITLE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ScholarshipType)
+                @Html.DisplayFor(modelItem => item.TYPE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumOfApplicants)
+                @Html.DisplayFor(modelItem => item.AMOUNT_TYPE)
             </td>
             <td>
-                $@Html.DisplayFor(modelItem => item.Amount)
+                $@Html.DisplayFor(modelItem => item.TOTAL_FUNDS)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AcademicYear)
+                @Html.DisplayFor(modelItem => item.DATE_AVAILABLE.Year)
             </td>
             <td>
-                @Html.ActionLink("Details", "ScholarshipInfo", new { id = item.ScholarshipId })
+                @Html.ActionLink("Details", "ScholarshipInfo", new { id = item.ID })
             </td>
         </tr>
     }

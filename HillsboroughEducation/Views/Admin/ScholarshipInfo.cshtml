@@ -8,37 +8,37 @@
     <table>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ScholarshipName)
+                @Html.DisplayNameFor(model => model.TITLE)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ScholarshipType)
+                @Html.DisplayNameFor(model => model.TYPE)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AcademicYear)
+                @Html.DisplayNameFor(model => model.DATE_AVAILABLE.Year)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumOfApplicants)
+                @Html.DisplayNameFor(model => model.AMOUNT_TYPE)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                @Html.DisplayNameFor(model => model.TOTAL_FUNDS)
             </th>
         </tr>
 
         <tr>
             <td>
-                @Html.DisplayFor(model => model.ScholarshipName)
+                @Html.DisplayFor(model => model.TITLE)
             </td>
             <td>
-                @Html.DisplayFor(model => model.ScholarshipType)
+                @Html.DisplayFor(model => model.TYPE)
             </td>
             <td>
-                @Html.DisplayFor(model => model.AcademicYear)
+                @Html.DisplayFor(model => model.DATE_AVAILABLE.Year)
             </td>
             <td>
-                @Html.DisplayFor(model => model.NumOfApplicants)
+                @Html.DisplayFor(model => model.AMOUNT_TYPE)
             </td>
             <td>
-                $@Html.DisplayFor(model => model.Amount)
+                $@Html.DisplayFor(model => model.TOTAL_FUNDS)
             </td>
         </tr>
     </table>
