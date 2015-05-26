@@ -1,4 +1,4 @@
-﻿@model HillsboroughEducation.Models.ScholarshipModel
+﻿@model HillsboroughEducation.Models.Criteria
 
 @{
     ViewBag.Title = "CreateAcademicInfo";
@@ -13,21 +13,12 @@
  <fieldset>
         <legend>Academic Information</legend>
         <div class="editor-label">
-            @Html.LabelFor(model => model.AdjustedGrossIncome)
+            @Html.LabelFor(model => model.DESCR)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.AdjustedGrossIncome)
-            @Html.ValidationMessageFor(model => model.AdjustedGrossIncome)
+            @Html.EditorFor(model => model.DESCR)
+            @Html.ValidationMessageFor(model => model.DESCR)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NumberInHousehold)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NumberInHousehold)
-            @Html.ValidationMessageFor(model => model.NumberInHousehold)
-        </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>

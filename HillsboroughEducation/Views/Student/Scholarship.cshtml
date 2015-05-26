@@ -39,16 +39,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ScholarshipName)
+                @Html.DisplayFor(modelItem => item.TITLE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ScholarshipType)
+                @Html.DisplayFor(modelItem => item.TYPE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AcademicYear)
+                @Html.DisplayFor(modelItem => item.DATE_AVAILABLE.Year)
             </td>
             <td>
-                @Html.ActionLink("Details", "ScholarshipDetails", new { id = item.ScholarshipId })
+                @Html.ActionLink("Details", "ScholarshipDetails", new { id = item.ID })
             </td>
         </tr>
     }
@@ -58,3 +58,5 @@
             </form>
         </div>
             </div>
+
+   

@@ -1,4 +1,4 @@
-﻿@model HillsboroughEducation.Models.ScholarshipModel
+﻿@model HillsboroughEducation.Models.Criteria
 
 @{
     ViewBag.Title = "EditAcademicInfo";
@@ -13,19 +13,11 @@
  <fieldset>
         <legend>Academic Information</legend>
         <div class="editor-label">
-            @Html.Display("Which of the following types of student most closely matches you?")
+            @Html.LabelFor(model => model.DESCR)
         </div>
         <div class="editor-field">
-            @Html.Display("model => model.AdjustedGrossIncome")
-            @Html.Display("model => model.AdjustedGrossIncome")
-        </div>
-
-        <div class="editor-label">
-            @Html.Display("Are you a hillsborough county Public Schools permanent CTAE instr")
-        </div>
-        <div class="editor-field">
-            @Html.Display("model => model.NumberInHousehold")
-            @Html.Display("model => model.NumberInHousehold")
+            @Html.EditorFor(model => model.DESCR)
+            @Html.ValidationMessageFor(model => model.DESCR)
         </div>
 
         <p>

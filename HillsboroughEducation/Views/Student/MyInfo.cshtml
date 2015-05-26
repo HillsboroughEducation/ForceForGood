@@ -106,11 +106,11 @@
             <h2>Financial Information</h2>
             <section>
                 Adjusted Gross Income:
-                @Html.Display("model => model.GrossIncome")
+                @Html.DisplayFor(model => model.AdjustedGrossIncome)
             </section>
             <section>
                 Number of people in Household:
-                @Html.Display("model => model.Household")
+                @Html.DisplayFor(model => model.NumberInHousehold)
             </section>
         </div>
 
@@ -168,10 +168,7 @@
                 Do you qualify for free or reduced lunch?
                 @Html.DisplayText("")
             </section>
-            <section>
-                Do you qualify for free or reduced lunch?
-                @Html.DisplayText("")
-            </section>
+
         </div>
 
         <div id="application">

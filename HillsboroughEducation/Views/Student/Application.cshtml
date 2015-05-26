@@ -29,7 +29,7 @@
             @Html.ActionLink("Scholarship Type", "Scholarship", new { sortOrder = ViewBag.ScholarShipTypeSortParam })
         </th>
         <th>
-            @Html.ActionLink("Application Status", "Scholarship", new { sortOrder = ViewBag.AcademicYearSortParam })
+            @Html.ActionLink("Scholarship Details", "Scholarship", new { sortOrder = ViewBag.AcademicYearSortParam })
         </th>
 
         <th></th>
@@ -39,16 +39,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ScholarshipName)
+                @Html.DisplayFor(modelItem => item.TITLE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ScholarshipType)
+                @Html.DisplayFor(modelItem => item.TYPE)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AcademicYear)
+                @Html.DisplayFor(modelItem => item.DATE_AVAILABLE.Year)
             </td>
             <td>
-                @Html.ActionLink("Details", "ScholarshipDetails", new { id = item.ScholarshipId })
+                @Html.ActionLink("Details", "Scholarship Details", new { id = item.ID })
             </td>
         </tr>
     }
