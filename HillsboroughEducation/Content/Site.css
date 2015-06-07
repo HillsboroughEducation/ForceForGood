@@ -801,6 +801,7 @@ nav,
 section,
 summary {
   display: block;
+  padding: 5px;
 }
 audio,
 canvas,
