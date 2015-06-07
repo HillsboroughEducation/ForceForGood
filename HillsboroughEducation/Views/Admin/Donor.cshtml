@@ -14,7 +14,7 @@
         <input type="submit" value="Submit" />
     </p>
 }
-<table>
+<table class="table">
     <tr>
         <th>
             @Html.ActionLink("Donor ID", "Donor", new { sortOrder = ViewBag.DonorIdSortParam })
@@ -22,7 +22,7 @@
         <th>
             @Html.ActionLink("Donor Name", "Donor", new { sortOrder = ViewBag.DonorNameSortParam })
         </th>
-        
+
         <th></th>
     </tr>
 
@@ -35,7 +35,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NAME)
             </td>
-    
+
             <td>
                 @Html.ActionLink("Edit", "EditDonor", new { id = item.ID })
                 @Html.ActionLink("Details", "DonorInfo", new { id = item.ID })
