@@ -28,6 +28,13 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
+        // GET: /Student/ScholarshipApplication
+        public ActionResult ScholarshipApplication()
+        {
+            return View();
+        }
+
+        //
         // GET: /Student/Index
         public ActionResult Index()
         {
@@ -235,14 +242,14 @@ namespace HillsboroughEducation.Controllers
         // POST: /Student/CreateAcademicInfo
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAcademicInfo(Criteria Academic)
+        public ActionResult CreateAcademicInfo(Criteria academic)
         {
             var errors = GetRealErrors(ModelState);
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dbCriteria.CriteriaProfiles.Add(Academic);
+                    dbCriteria.CriteriaProfiles.Add(academic);
                     dbCriteria.SaveChanges();
                     return RedirectToAction("Index", "MyInfo");
                 }
@@ -254,37 +261,37 @@ namespace HillsboroughEducation.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            return View(Academic);
+            return View(academic);
         }
 
         //
         // GET: /Student/EditAcademicInfo
         public ActionResult EditAcademicInfo(int id = 1)
         {
-            StudentModel student = dbStudent.StudentProfiles.Find(id);
+            Criteria academic = dbCriteria.CriteriaProfiles.Find(id);
 
-            if (student == null)
+            if (academic == null)
             {
                 return HttpNotFound();
             }
 
-            return View(student);
+            return View(academic);
         }
 
         //
         // POST: /Student/EditAcademicInfo
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAcademicInfo(StudentModel student)
+        public ActionResult EditAcademicInfo(Criteria academic)
         {
             var errors = GetRealErrors(ModelState);
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dbStudent.Entry(student).State = EntityState.Modified;
-                    dbStudent.SaveChanges();
-                    return RedirectToAction("Index", "Student");
+                    dbCriteria.Entry(academic).State = EntityState.Modified;
+                    dbCriteria.SaveChanges();
+                    return RedirectToAction("Index", "MyInfo");
                 }
             }
             catch (DataException dex)
@@ -294,7 +301,7 @@ namespace HillsboroughEducation.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            return View(student);
+            return View(academic);
         }
 
         //
@@ -353,7 +360,7 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Student/Application
-        public ActionResult ScholarshipApplication(string sortOrder, string searchString)
+        public ActionResult Application(string sortOrder, string searchString)
         {
             ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarshipName_desc" : "";
             ViewBag.ScholarShipTypeSortParam = sortOrder == "ScholarshipType" ? "scholarshipType_desc" : "ScholarshipType";

@@ -19,11 +19,39 @@
     <div id="tabs">
 
         <ul>
-            <li>@Html.ActionLink("Scholarship Information", "ScholarshipDetails", "Student", new { id = Model.ID }, "")</li>
+            <li><a href="#details">Scholarship Details</a>"</li>
             <li><a href="#application">Application</a></li>
             <li><a href="#letters">Letters</a></li>
             <li><a href="#documents">Documents</a></li>
         </ul>
+
+       <div id ="details">
+           <h3>Scholarship Details</h3>
+           <section>
+                Scholarship Title:
+                @Html.DisplayFor(model => model.TITLE)
+            </section>
+            <section>
+                Scholarship Description:
+                @Html.DisplayFor(model => model.DESCR)
+            </section>
+            <section>
+                Scholarship Type:
+                @Html.DisplayFor(model => model.TYPE)
+            </section>
+            <section>
+                Date Available:
+                @Html.DisplayFor(model => model.DATE_AVAILABLE.Year)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.DEADLINE)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.AMOUNT_PER_RECIPIENT)
+            </section>
+       </div>
 
         <div id="application">
             <h3>Application Scholarship Questions</h3>
@@ -56,47 +84,13 @@
             </div>
         </div>
 
-        <div id="scores">
-            <h3>Test Scores</h3>
-            <h3>ACT_SCORES_COME_UNDER_THIS_GROUP Scores</h3>
-            <h3>SAT_SCORES_COME_UNDER_THIS_GROUP Scores</h3>
-            <h3>FAFSA_SCORE Scores</h3>
-        </div>
-
-        <div id="question">
-            <h3>Opening Questionnaire</h3>
-            <div class="row">
-                <div class="col-md-12">
-                    Which of the following types of student most closely matches you?
-                    @Html.DisplayText("")
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    Do you attend a charted school?
-                    @Html.DisplayText("")
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    In what grade are you?
-                    @Html.DisplayText("")
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    Do you qualify for free or reduced lunch:
-                    @Html.DisplayText("")
-                </div>
-            </div>
-        </div>
-
-        <div id="essay">
-            <h3>Student Essay Questions</h3>
+       
+        <div id="letters">
+            <h3>Student Letters</h3>
         </div>
 
         <div id="documents">
-            <h3>Documents</h3>
+            <h3>Requested Documents</h3>
         </div>
 
         <p align="right">

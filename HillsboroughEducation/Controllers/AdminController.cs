@@ -255,6 +255,8 @@ namespace HillsboroughEducation.Controllers
             return View(scholarships.ToList());
         }
 
+        //
+        // GET: /Admin/ScholarshipInfo
         public ActionResult ScholarshipInfo(int id = 1)
         {
             ScholarshipModel scholarship = dbScholarship.ScholarshipProfiles.Find(id);

@@ -9,8 +9,8 @@ using System.Data.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Web.Security;
 
-namespace HillsboroughEducation.Controllers
-{
+namespace HillsboroughEducation.Controllers {
+
  //   [Authorize(Roles = "Reviewer")]
     public class ReviewerController : Controller
     {
@@ -40,6 +40,13 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Reviewer/Index
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Reviewer/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(String UserName)
@@ -98,7 +105,7 @@ namespace HillsboroughEducation.Controllers
         }
 
         //
-        //GET: /Reviewer/EditReviewerInfo
+        // GET: /Reviewer/EditReviewerInfo
         public ActionResult EditReviewerInfo(int id = 1)
         {
             Reviewers reviewer = dbReviewer.ReviewerProfiles.Find(id);
@@ -109,6 +116,39 @@ namespace HillsboroughEducation.Controllers
             }
 
             return View(reviewer);
+        }
+
+        //
+        // POST: /Reviewer/EditReviewerInfo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditReviewerInfo(Reviewers reviewer)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbReviewer.Entry(reviewer).State = EntityState.Modified;
+                    dbReviewer.SaveChanges();
+                    return RedirectToAction("Index", "Reviewer");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(reviewer);
+        }
+
+        //
+        // GET: /Reviewer/CreateReviewerInfo
+        public ActionResult CreateReviewerInfo()
+        {
+            return View();
         }
 
         //
@@ -137,39 +177,7 @@ namespace HillsboroughEducation.Controllers
             return View(reviewer);
         }
 
-        //
-        //GET: /Reviewer/CreateReviewerInfo
-        public ActionResult CreateReviewerInfo()
-        {
-            return View();
-        }
-
-        //
-        //POST: /Reviewer/EditReviewerInfo
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditReviewerInfo(Reviewers reviewer)
-        {
-            var errors = GetRealErrors(ModelState);
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    dbReviewer.Entry(reviewer).State = EntityState.Modified;
-                    dbReviewer.SaveChanges();
-                    return RedirectToAction("Index", "Reviewer");
-                }
-            }
-            catch (DataException dex)
-            {
-                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
-                Console.WriteLine("Unable to save changes: " + dex);
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
-
-            return View(reviewer);
-        }
-
+        
         //
         // GET: /Reviewer/Dashboard
         public ActionResult Dashboard(string sortOrder, string searchString)
