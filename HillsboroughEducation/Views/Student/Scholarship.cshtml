@@ -3,14 +3,12 @@
 @{
     var grid = new WebGrid(source: Model, defaultSort: "Scholarship", rowsPerPage: 20);
 }
-        <div id="tableBox" style="width:800px">
-        <div class="Title">Find a Scholarship
-        </div>
-        <div id="searchParameters" style="width:778px;background:#FFFFFF;padding:10px; border:1px solid #000000">
+        
+        Find a Scholarship
+        
             <h3>Search Parameters</h3><br />
             <form method="get">
-                <div>
-                    <div style="padding-bottom:5px">
+          
                       @using (Html.BeginForm())
 {
     <p>
@@ -20,7 +18,7 @@
          <input id="searchReset" type="submit" value="Clear" tabindex="8" style="margin-left:20px"/>
     </p>
 }
-<table>
+<table class="table">
     <tr>
         <th>
             @Html.ActionLink("Scholarship Name", "Scholarship", new { sortOrder = ViewBag.ScholarShipNameSortParam })
@@ -53,10 +51,7 @@
         </tr>
     }
 </table>             
-                    </div>
-                </div>
             </form>
-        </div>
-            </div>
+
 
    
