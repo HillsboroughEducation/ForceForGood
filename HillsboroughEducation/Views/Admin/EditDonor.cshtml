@@ -1,10 +1,10 @@
 ﻿@model HillsboroughEducation.Models.Donors
 
 @{
-    ViewBag.Title = "EditDonor";
+    ViewBag.Title = "Edit Donor";
 }
 
-<h2>EditDonor</h2>
+<h2>Edit Donor</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -53,9 +53,11 @@
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<p align="right">
+    <b>
+        @Html.ActionLink("Back to List", "Donor", "Admin", "", "")
+    </b>
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
