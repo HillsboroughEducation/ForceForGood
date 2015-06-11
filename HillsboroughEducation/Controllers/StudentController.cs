@@ -18,12 +18,20 @@ namespace HillsboroughEducation.Controllers
         private StudentContext dbStudent = new StudentContext();
         private ScholarshipContext dbScholarship = new ScholarshipContext();
         private FinancialContext dbFinancial = new FinancialContext();
+        private CriteriaContext dbCriteria = new CriteriaContext();
 
         //
         // GET: /Student/MyInfo
         public ActionResult MyInfo()
         {
                 return View();
+        }
+
+        //
+        // GET: /Student/ScholarshipApplication
+        public ActionResult ScholarshipApplication()
+        {
+            return View();
         }
 
         //
@@ -234,15 +242,15 @@ namespace HillsboroughEducation.Controllers
         // POST: /Student/CreateAcademicInfo
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAcademicInfo(ScholarshipModel Academic)
+        public ActionResult CreateAcademicInfo(Criteria academic)
         {
             var errors = GetRealErrors(ModelState);
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dbScholarship.ScholarshipProfiles.Add(Academic);
-                    dbScholarship.SaveChanges();
+                    dbCriteria.CriteriaProfiles.Add(academic);
+                    dbCriteria.SaveChanges();
                     return RedirectToAction("Index", "MyInfo");
                 }
             }
@@ -253,37 +261,37 @@ namespace HillsboroughEducation.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            return View(Academic);
+            return View(academic);
         }
 
         //
         // GET: /Student/EditAcademicInfo
         public ActionResult EditAcademicInfo(int id = 1)
         {
-            StudentModel student = dbStudent.StudentProfiles.Find(id);
+            Criteria academic = dbCriteria.CriteriaProfiles.Find(id);
 
-            if (student == null)
+            if (academic == null)
             {
                 return HttpNotFound();
             }
 
-            return View(student);
+            return View(academic);
         }
 
         //
         // POST: /Student/EditAcademicInfo
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditAcademicInfo(StudentModel student)
+        public ActionResult EditAcademicInfo(Criteria academic)
         {
             var errors = GetRealErrors(ModelState);
             try
             {
                 if (ModelState.IsValid)
                 {
-                    dbStudent.Entry(student).State = EntityState.Modified;
-                    dbStudent.SaveChanges();
-                    return RedirectToAction("Index", "Student");
+                    dbCriteria.Entry(academic).State = EntityState.Modified;
+                    dbCriteria.SaveChanges();
+                    return RedirectToAction("Index", "MyInfo");
                 }
             }
             catch (DataException dex)
@@ -293,16 +301,16 @@ namespace HillsboroughEducation.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            return View(student);
+            return View(academic);
         }
 
         //
         // GET: /Student/Scholarship
         public ActionResult Scholarship(string sortOrder, string searchString)
         {
-            ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarship Name_desc" : "";
-            ViewBag.ScholarShipTypeSortParam = sortOrder == "Scholarship Type" ? "scholarship Type_desc" : "Scholarship Type";
-            ViewBag.AcademicYearSortParam = sortOrder == "Academic Year" ? "academic Year_desc" : "Academic Year";
+            ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarshipName_desc" : "";
+            ViewBag.ScholarShipTypeSortParam = sortOrder == "ScholarshipType" ? "scholarshipType_desc" : "ScholarshipType";
+            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
             var scholarships = from s in dbScholarship.ScholarshipProfiles
                                select s;
 
@@ -310,28 +318,34 @@ namespace HillsboroughEducation.Controllers
             {
                 scholarships = scholarships.Where(s => (s.TITLE.Contains(searchString)) ||
                                             (s.TYPE.Contains(searchString))).OrderBy(s => s.TITLE);
+
+                if (scholarships.Count() == 0)
+                {
+                    scholarships = (from s in dbScholarship.ScholarshipProfiles
+                                    select s).OrderBy(s => s.TITLE);
+                }
             }
 
             #region Sorting
             switch (sortOrder)
             {
-                case "scholarship Name_desc":
+                case "scholarshipName_desc":
                     scholarships = scholarships.OrderByDescending(s => s.TITLE);
                     break;
 
-                case "Scholarship Type":
+                case "ScholarshipType":
                     scholarships = scholarships.OrderBy(s => s.TYPE);
                     break;
 
-                case "scholarship Type_desc":
+                case "scholarshipType_desc":
                     scholarships = scholarships.OrderByDescending(s => s.TYPE);
                     break;
 
-                case "Academic Year":
+                case "AcademicYear":
                     scholarships = scholarships.OrderBy(s => s.DATE_AVAILABLE.Year);
                     break;
 
-                case "academic Year_desc":
+                case "academicYear_desc":
                     scholarships = scholarships.OrderByDescending(s => s.DATE_AVAILABLE.Year);
                     break;
 
@@ -346,7 +360,61 @@ namespace HillsboroughEducation.Controllers
 
         //
         // GET: /Student/Application
-        public ActionResult ScholarshipApplication()
+        public ActionResult Application(string sortOrder, string searchString)
+        {
+            ViewBag.ScholarShipNameSortParam = String.IsNullOrEmpty(sortOrder) ? "scholarshipName_desc" : "";
+            ViewBag.ScholarShipTypeSortParam = sortOrder == "ScholarshipType" ? "scholarshipType_desc" : "ScholarshipType";
+            ViewBag.AcademicYearSortParam = sortOrder == "AcademicYear" ? "academicYear_desc" : "AcademicYear";
+            var scholarships = from s in dbScholarship.ScholarshipProfiles
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                scholarships = scholarships.Where(s => (s.TITLE.Contains(searchString)) ||
+                                            (s.TYPE.Contains(searchString))).OrderBy(s => s.TITLE);
+
+                if (scholarships.Count() == 0)
+                {
+                    scholarships = (from s in dbScholarship.ScholarshipProfiles
+                                    select s).OrderBy(s => s.TITLE);
+                }
+            }
+
+            #region Sorting
+            switch (sortOrder)
+            {
+                case "scholarshipName_desc":
+                    scholarships = scholarships.OrderByDescending(s => s.TITLE);
+                    break;
+
+                case "ScholarshipType":
+                    scholarships = scholarships.OrderBy(s => s.TYPE);
+                    break;
+
+                case "scholarshipType_desc":
+                    scholarships = scholarships.OrderByDescending(s => s.TYPE);
+                    break;
+
+                case "AcademicYear":
+                    scholarships = scholarships.OrderBy(s => s.DATE_AVAILABLE.Year);
+                    break;
+
+                case "academicYear_desc":
+                    scholarships = scholarships.OrderByDescending(s => s.DATE_AVAILABLE.Year);
+                    break;
+
+                default:
+                    scholarships = scholarships.OrderBy(s => s.TITLE);
+                    break;
+            }
+            #endregion
+
+            return View(scholarships.ToList());
+        }
+
+        //
+        // GET: /Student/ScholarshipDetails
+        public ActionResult ScholarshipDetails()
         {
             return View();
         }

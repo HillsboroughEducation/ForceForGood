@@ -1,5 +1,46 @@
-﻿@{
+﻿@model HillsboroughEducation.Models.ScholarshipModel
+
+@{
     ViewBag.Title = "ScholarshipDetails";
 }
 
-<h2>Scholarshipdetails</h2>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+ <div id="ScholarshipDetails">
+            <h2>Scholarship Details</h2>
+            <section>
+                Scholarship Title:
+                @Html.DisplayFor(model => model.TITLE)
+            </section>
+            <section>
+                Scholarship Description:
+                @Html.DisplayFor(model => model.DESCR)
+            </section>
+            <section>
+                Scholarship Type:
+                @Html.DisplayFor(model => model.TYPE)
+            </section>
+            <section>
+                Date Available:
+                @Html.DisplayFor(model => model.DATE_AVAILABLE.Year)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.DEADLINE)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.AMOUNT_PER_RECIPIENT)
+            </section>
+</div>  
+}
+
+<div>
+    @Html.ActionLink("Back to Home Page", "MyInfo")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

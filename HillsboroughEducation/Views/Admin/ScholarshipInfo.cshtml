@@ -1,51 +1,172 @@
 ﻿@model HillsboroughEducation.Models.ScholarshipModel
 
-<!DOCTYPE html>
+@{
+    ViewBag.Title = "ScholarshipInfo";
+}
 
-<html>
+<script>
+    $m = jQuery.noConflict();
+</script>
+<script type="text/javascript">
+    $m(document).ready(function () {
+        $m('#tabs').tabs();
+    });
+</script>
+
 <body>
 
-    <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TITLE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TYPE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DATE_AVAILABLE.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AMOUNT_TYPE)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TOTAL_FUNDS)
-            </th>
-        </tr>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TITLE)
+    </div>
+    <div id="tabs">
+        <ul>
+            <li><a href="#info">Scholarship Info</a></li>
+            <li>@Html.ActionLink("Donors", "Donor", "Admin", new { id = Model.ID }, "")</li>
+            <li>@Html.ActionLink("Criteria", "Criteria", "Admin", new { id = Model.ID }, "")</li>
+            <li><a href="#essay">Scholarship Essays</a></li>
+            <li><a href="#documents">Requested Documents</a></li>
+            <li><a href="#letters">Letters</a></li>
+            <li><a href="#scoring">Scoring</a></li>
+            <li><a href="#review">Review Members</a></li>
+            <li><a href="#qualifying">Qualifying Students</a></li>
+            <li>@Html.ActionLink("Award Scholarship", "Awards", "Admin", new { id = Model.ID }, "")</li>
+        </ul>
 
-        <tr>
-            <td>
+        <div id="info">
+            <h2>Scholarship Info</h2>
+            <section>
+                Scholarship Title:
                 @Html.DisplayFor(model => model.TITLE)
-            </td>
-            <td>
+            </section>
+            <section>
+                Scholarship Description:
+                @Html.DisplayFor(model => model.DESCR)
+            </section>
+            <section>
+                Scholarship Type:
                 @Html.DisplayFor(model => model.TYPE)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.DATE_AVAILABLE.Year)
-            </td>
-            <td>
+            </section>
+            <section>
+                Date Available:
+                @Html.DisplayFor(model => model.DATE_AVAILABLE)
+            </section>
+            <section>
+                Amount Type:
                 @Html.DisplayFor(model => model.AMOUNT_TYPE)
-            </td>
-            <td>
-                $@Html.DisplayFor(model => model.TOTAL_FUNDS)
-            </td>
-        </tr>
-    </table>
-    <p align="right">
-        <b>
+            </section>
+            <section>
+                Total Scholarship Funds:
+                @Html.DisplayFor(model => model.TOTAL_FUNDS)
+            </section>
+            <section>
+                Length of Scholarship:
+                @Html.DisplayFor(model => model.LENGTH)
+            </section>
+            <section>
+                Deadline:
+                @Html.DisplayFor(model => model.DEADLINE)
+            </section>
+            <section>
+                Number Awarded:
+                @Html.DisplayFor(model => model.NUMBER_AWARDED)
+            </section>
+            <section>
+                Amount Awarded per Recipient:
+                @Html.DisplayFor(model => model.AMOUNT_PER_RECIPIENT)
+            </section>
+            <section>
+                Number of Installments:
+                @Html.DisplayFor(model => model.NUMBER_INSTALLMENTS)
+            </section>
+            <section>
+                Amount per Installment:
+                @Html.DisplayFor(model => model.AMOUNT_PER_INSTALLMENT)
+            </section>
+            <section>
+                Credits Required to Maintain:
+                @Html.DisplayFor(model => model.CREDITS_REQUIRED)
+            </section>
+            <section>
+                GPA Required to Maintain:
+                @Html.DisplayFor(model => model.GPA_REQUIRED)
+            </section>
+            <section>
+                Endowment?:
+                @Html.DisplayFor(model => model.ENDOWMENT_IND)
+            </section>
+            <section>
+                Renewable?:
+                @Html.DisplayFor(model => model.RENEW_IND)
+            </section>
+            <section>
+                Reviewer Start Date:
+                @Html.DisplayFor(model => model.REVIEW_START_DATE)
+            </section>
+            <section>
+                Reviewer End Date:
+                @Html.DisplayFor(model => model.REVIEW_END_DATE)
+            </section>
+            <section>
+                Selection:
+                @Html.DisplayFor(model => model.SELECTION)
+            </section>
+            <section>
+                Basis for Selection:
+                @Html.DisplayFor(model => model.SELECTION_BASIS)
+            </section>
+            <section>
+                Approved Use of Funds:
+                @Html.DisplayFor(model => model.APPROVED_USE_FUNDS)
+            </section>
+            <section>
+                Disbursement:
+                @Html.DisplayFor(model => model.DISBURSEMENT)
+            </section>
+            <section>
+                How Often Awarded:
+                @Html.DisplayFor(model => model.AWARD_FREQUENCY)
+            </section>
+            <section>
+                Presented:
+                @Html.DisplayFor(model => model.PRESENTED)
+            </section>
+            <section>
+                Script for Award Ceremony:
+                @Html.DisplayFor(model => model.AWARD_SCRIPT)
+            </section>
+            <section>
+                Comments:
+                @Html.DisplayFor(model => model.COMMENTS)
+            </section>
+        </div>
+
+        <div id="essay">
+            <h2>Student Essay Questions</h2>
+        </div>
+
+        <div id="documents">
+            <h2>Documents</h2>
+        </div>
+
+        <div id="letters">
+            <h2>Letters</h2>
+        </div>
+
+        <div id="scoring">
+            <h2>Scoring</h2>
+        </div>
+
+        <div id="review">
+            <h2>Review Members</h2>
+        </div>
+
+        <div id="qualifying">
+            <h2>Qualifying Students</h2>
+        </div>
+
+        <p align="right"><b>
             @Html.ActionLink("Back to List", "Scholarship", "Admin", "", "")
-        </b>
-    </p>
+            </b>
+        </p>
+    </div>
 </body>
-</html>

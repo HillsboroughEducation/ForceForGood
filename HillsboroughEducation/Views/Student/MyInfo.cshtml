@@ -16,18 +16,18 @@
 <body>
     <div id="tabs">
         <ul>
-            <li><a href="#personal">Personal Information</a></li>
-            <li><a href="#financial">Financial Information</a></li>
+            <li><a href="#personal">Personal Info</a></li>
+            <li><a href="#financial">Financial Info</a></li>
             <li><a href="#academic">Academic Criteria</a></li>
             <li><a href="#scores">Test Scores</a></li>
             <li><a href="#question">Questionnaire</a></li>
-            <li><a href="#essay">Student Essay Questions</a></li>
+            <li><a href="#essay">Essay Questions</a></li>
             <li><a href="#documents">Documents</a></li>
             <li><a href="#application">Scholarship Application</a></li>
         </ul>
 
         <div id="personal">
-            <h2>Personal Information</h2>
+            <h3>Personal Information</h3>
             <section>
                 First Name:
                 @Html.DisplayFor(model => model.FirstName)
@@ -103,19 +103,19 @@
         </div>
 
         <div id="financial">
-            <h2>Financial Information</h2>
+            <h3>Financial Information</h3>
             <section>
                 Adjusted Gross Income:
-                @Html.Display("model => model.GrossIncome")
+                @Html.Display("model => model.AdjustedGrossIncome")
             </section>
             <section>
                 Number of people in Household:
-                @Html.Display("model => model.Household")
+                @Html.Display("model => model.NumberInHousehold")
             </section>
         </div>
 
         <div id="academic">
-            <h2>Academic Information</h2>
+            <h3>Academic Information</h3>
             <section>
                 Class Year:
                 @Html.Display("model => model.Seniority")
@@ -151,7 +151,7 @@
         </div>
 
         <div id="question">
-            <h2>Criteria Questions</h2>
+            <h3>Criteria Questions</h3>
             <section>
                 Which of the following types of student most closely matches you?
                 @Html.DisplayText("")
@@ -168,14 +168,11 @@
                 Do you qualify for free or reduced lunch?
                 @Html.DisplayText("")
             </section>
-            <section>
-                Do you qualify for free or reduced lunch?
-                @Html.DisplayText("")
-            </section>
+
         </div>
 
         <div id="application">
-            <h2>Scholarship Application Information</h2>
+            <h3>Scholarship Application Information</h3>
             <table>
                 <tr>
                     <th>
@@ -193,7 +190,7 @@
         </div>
 
         <div id="documents">
-            <h2>Documents</h2>
+            <h3>Documents</h3>
         </div>
 
         <p align="right">

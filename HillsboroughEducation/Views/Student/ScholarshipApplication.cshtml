@@ -1,5 +1,102 @@
-﻿@{
+﻿@model HillsboroughEducation.Models.ScholarshipModel
+
+@{
     ViewBag.Title = "ScholarshipApplication";
 }
 
-<h2>ScholarshipApplication</h2>
+<script>
+    $m = jQuery.noConflict();
+</script>
+<script type="text/javascript">
+    $m(document).ready(function () {
+        $m('#tabs').tabs();
+    });
+</script>
+
+<body>
+
+
+    <div id="tabs">
+
+        <ul>
+            <li><a href="#details">Scholarship Details</a>"</li>
+            <li><a href="#application">Application</a></li>
+            <li><a href="#letters">Letters</a></li>
+            <li><a href="#documents">Documents</a></li>
+        </ul>
+
+       <div id ="details">
+           <h3>Scholarship Details</h3>
+           <section>
+                Scholarship Title:
+                @Html.DisplayFor(model => model.TITLE)
+            </section>
+            <section>
+                Scholarship Description:
+                @Html.DisplayFor(model => model.DESCR)
+            </section>
+            <section>
+                Scholarship Type:
+                @Html.DisplayFor(model => model.TYPE)
+            </section>
+            <section>
+                Date Available:
+                @Html.DisplayFor(model => model.DATE_AVAILABLE.Year)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.DEADLINE)
+            </section>
+            <section>
+                First Name:
+                @Html.DisplayFor(model => model.AMOUNT_PER_RECIPIENT)
+            </section>
+       </div>
+
+        <div id="application">
+            <h3>Application Scholarship Questions</h3>
+
+            Type of Student:
+
+            <div class="row">
+                <div class="col-md-6">
+                    School Name:
+                    <input type="text" class="form-control" placeholder="@Html.DisplayText("")">
+                </div>
+                <div class="col-md-4">
+                    Exp. HS Graduation Date:
+                    <input type="text" class="form-control" placeholder="@Html.DisplayText("")">
+                </div>
+                <div class="col-md-2">
+                    GPA:
+                    <input type="text" class="form-control" placeholder="@Html.DisplayText("")">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    Major are of study or program:
+                    <input type="text" class="form-control" placeholder="@Html.DisplayText("")">
+                </div>
+                <div class="col-md-6">
+                    Exp. Degree:
+                    <input type="text" class="form-control" placeholder="@Html.DisplayText("")">
+                </div>
+            </div>
+        </div>
+
+       
+        <div id="letters">
+            <h3>Student Letters</h3>
+        </div>
+
+        <div id="documents">
+            <h3>Requested Documents</h3>
+        </div>
+
+        <p align="right">
+            <b>
+                @Html.ActionLink("Back to List", "ScholarshipApplication", "Student", "", "")
+            </b>
+        </p>
+    </div>
+</body>

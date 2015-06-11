@@ -13,152 +13,154 @@
  <fieldset>
         <legend>Personal Information</legend>
         <div class="editor-label">
-            @Html.LabelFor(model => model.AcademicYear)
+            @Html.LabelFor(model => model.ACADEMIC_YEAR)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.AcademicYear)
-            @Html.ValidationMessageFor(model => model.AcademicYear)
+            @Html.EditorFor(model => model.ACADEMIC_YEAR)
+            @Html.ValidationMessageFor(model => model.ACADEMIC_YEAR)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.FirstName)
+            @Html.LabelFor(model => model.FIRST_NAME)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
+            @Html.EditorFor(model => model.FIRST_NAME)
+            @Html.ValidationMessageFor(model => model.FIRST_NAME)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.MiddleName)
+            @Html.LabelFor(model => model.LAST_NAME)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.MiddleName)
-            @Html.ValidationMessageFor(model => model.MiddleName)
+            @Html.EditorFor(model => model.LAST_NAME)
+            @Html.ValidationMessageFor(model => model.LAST_NAME)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.LastName)
+            @Html.LabelFor(model => model.COUNTRY)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
+            @Html.EditorFor(model => model.COUNTRY)
+            @Html.ValidationMessageFor(model => model.COUNTRY)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SocialSecurity)
+            @Html.LabelFor(model => model.GENDER)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.SocialSecurity)
+            @Html.EditorFor(model => model.GENDER)
+            @Html.ValidationMessageFor(model => model.GENDER)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Country)
+            @Html.LabelFor(model => model.ADDRESS_LINE1)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Country)
-            @Html.ValidationMessageFor(model => model.Country)
+            @Html.EditorFor(model => model.ADDRESS_LINE1)
+            @Html.ValidationMessageFor(model => model.ADDRESS_LINE1)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Gender)
+            @Html.LabelFor(model => model.ADDRESS_LINE2)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Gender)
-            @Html.ValidationMessageFor(model => model.Gender)
+            @Html.EditorFor(model => model.ADDRESS_LINE2)
+            @Html.ValidationMessageFor(model => model.ADDRESS_LINE2)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Ethnicity)
+            @Html.LabelFor(model => model.CITY)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Ethnicity)
-            @Html.ValidationMessageFor(model => model.Ethnicity)
+            @Html.EditorFor(model => model.CITY)
+            @Html.ValidationMessageFor(model => model.CITY)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.BirthDate)
+            @Html.LabelFor(model => model.STATE)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.BirthDate)
-            @Html.ValidationMessageFor(model => model.BirthDate)
+            @Html.EditorFor(model => model.STATE)
+            @Html.ValidationMessageFor(model => model.STATE)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Address1)
+            @Html.LabelFor(model => model.COUNTY)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Address1)
-            @Html.ValidationMessageFor(model => model.Address1)
+            @Html.EditorFor(model => model.COUNTY)
+            @Html.ValidationMessageFor(model => model.COUNTY)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Address2)
+            @Html.LabelFor(model => model.POSTAL_CODE)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Address2)
-            @Html.ValidationMessageFor(model => model.Address2)
+            @Html.EditorFor(model => model.POSTAL_CODE)
+            @Html.ValidationMessageFor(model => model.POSTAL_CODE)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.StudentNumber)
+            @Html.LabelFor(model => model.HOME_PHONE)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StudentNumber)
+            @Html.EditorFor(model => model.HOME_PHONE)
+            @Html.ValidationMessageFor(model => model.HOME_PHONE)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.City)
+            @Html.LabelFor(model => model.WORK_PHONE)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.City)
-            @Html.ValidationMessageFor(model => model.City)
+            @Html.EditorFor(model => model.WORK_PHONE)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.State)
+            @Html.LabelFor(model => model.CELL_PHONE)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.State)
-            @Html.ValidationMessageFor(model => model.State)
+            @Html.EditorFor(model => model.CELL_PHONE)
+            @Html.ValidationMessageFor(model => model.CELL_PHONE)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.County)
+            @Html.LabelFor(model => model.EMAIL)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.County)
-            @Html.ValidationMessageFor(model => model.County)
+            @Html.EditorFor(model => model.EMAIL)
+            @Html.ValidationMessageFor(model => model.EMAIL)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.PostalCode)
+            @Html.LabelFor(model => model.NOTES)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.PostalCode)
-            @Html.ValidationMessageFor(model => model.PostalCode)
+            @Html.EditorFor(model => model.NOTES)
+            @Html.ValidationMessageFor(model => model.NOTES)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.HomePhone)
+            @Html.LabelFor(model => model.BAD_EMAIL)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.HomePhone)
-            @Html.ValidationMessageFor(model => model.HomePhone)
+            @Html.EditorFor(model => model.BAD_EMAIL)
+            @Html.ValidationMessageFor(model => model.BAD_EMAIL)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.WorkPhone)
+            @Html.LabelFor(model => model.ORG_SEQ)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.WorkPhone)
+            @Html.EditorFor(model => model.ORG_SEQ)
+            @Html.ValidationMessageFor(model => model.ORG_SEQ)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.CellPhone)
+            @Html.LabelFor(model => model.REVIEWER_ID)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CellPhone)
-            @Html.ValidationMessageFor(model => model.CellPhone)
+            @Html.EditorFor(model => model.REVIEWER_ID)
+            @Html.ValidationMessageFor(model => model.REVIEWER_ID)
         </div>
         <p>
             <input type="submit" value="Create" />
