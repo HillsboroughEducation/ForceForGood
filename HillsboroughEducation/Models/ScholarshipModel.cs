@@ -89,7 +89,6 @@ namespace HillsboroughEducation.Models
         [Display(Name = "Review End Date")]
         public Nullable<System.DateTime> REVIEW_END_DATE { get; set; }
 
-
         [Display(Name = "Selection")]
         public string SELECTION { get; set; }
 

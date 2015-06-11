@@ -9,6 +9,8 @@
 <body>
     @using (Html.BeginForm())
     {
+        <h2>@Html.ActionLink("Add new reviewer", "CreateReviewer", "Admin")</h2>
+
         <p>
             Search by: Last name, First name, or Academic Year <br />
             @Html.TextBox("SearchString")
@@ -18,13 +20,13 @@
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("Last Name", "Student", new { sortOrder = ViewBag.LastNameSortParam })
+                @Html.ActionLink("Last Name", "Reviewer", new { sortOrder = ViewBag.LastNameSortParam })
             </th>
             <th>
-                @Html.ActionLink("First Name", "Student", new { sortOrder = ViewBag.FirstNameSortParam })
+                @Html.ActionLink("First Name", "Reviewer", new { sortOrder = ViewBag.FirstNameSortParam })
             </th>
             <th>
-                @Html.ActionLink("Academic Year", "Student", new { sortOrder = ViewBag.AcademicYearSortParam })
+                @Html.ActionLink("Academic Year", "Reviewer", new { sortOrder = ViewBag.AcademicYearSortParam })
             </th>
             <th></th>
         </tr>
@@ -42,7 +44,8 @@
                     @Html.DisplayFor(modelItem => item.ACADEMIC_YEAR)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "StudentInfo", new { id = item.REVIEWER_ID })
+                    @Html.ActionLink("Edit", "EditReviewer", new { id = item.REVIEWER_ID })
+                    @Html.ActionLink("Details", "ReviewerInfo", new { id = item.REVIEWER_ID })
                 </td>
             </tr>
         }

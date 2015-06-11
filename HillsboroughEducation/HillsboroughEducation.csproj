@@ -400,6 +400,8 @@
     <Content Include="Views\Admin\CreateCriteria.cshtml" />
     <Content Include="Views\Admin\EditCriteria.cshtml" />
     <Content Include="Views\Admin\CreateScholarship.cshtml" />
+    <Content Include="Views\Admin\ReviewerInfo.cshtml" />
+    <Content Include="Views\Admin\EditReviewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

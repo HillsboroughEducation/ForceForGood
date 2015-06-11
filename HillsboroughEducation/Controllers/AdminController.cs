@@ -400,6 +400,59 @@ namespace HillsboroughEducation.Controllers
             return View(reviewer);
         }
 
+        public ActionResult ReviewerInfo(int id = 1)
+        {
+            Reviewers reviewer = dbReviewer.ReviewerProfiles.Find(id);
+
+            if (reviewer == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(reviewer);
+        }
+
+        //
+        // GET:  /Admin/EditReviewer
+        public ActionResult EditReviewer(int id = 1)
+        {
+            Reviewers reviewer = dbReviewer.ReviewerProfiles.Find(id);
+
+            if (reviewer == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(reviewer);
+        }
+
+
+        //
+        // POST: /Admin/EditReviewer
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditReviewer(Reviewers reviewer)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbReviewer.Entry(reviewer).State = EntityState.Modified;
+                    dbReviewer.SaveChanges();
+                    return RedirectToAction("Reviewer", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            return View(reviewer);
+        }
+
         //
         // GET: /Admin/Donor
         public ActionResult Donor(String sortOrder, String searchString)

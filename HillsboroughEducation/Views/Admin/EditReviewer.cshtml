@@ -1,0 +1,182 @@
+﻿@model HillsboroughEducation.Models.Reviewers
+
+@{
+    ViewBag.Title = "EditReviewer";
+}
+
+<h2>EditReviewer</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Reviewers</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.USER_SEQ)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.USER_SEQ)
+            @Html.ValidationMessageFor(model => model.USER_SEQ)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ACADEMIC_YEAR)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ACADEMIC_YEAR)
+            @Html.ValidationMessageFor(model => model.ACADEMIC_YEAR)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FIRST_NAME)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FIRST_NAME)
+            @Html.ValidationMessageFor(model => model.FIRST_NAME)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LAST_NAME)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LAST_NAME)
+            @Html.ValidationMessageFor(model => model.LAST_NAME)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.COUNTRY)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.COUNTRY)
+            @Html.ValidationMessageFor(model => model.COUNTRY)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GENDER)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GENDER)
+            @Html.ValidationMessageFor(model => model.GENDER)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ADDRESS_LINE1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ADDRESS_LINE1)
+            @Html.ValidationMessageFor(model => model.ADDRESS_LINE1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ADDRESS_LINE2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ADDRESS_LINE2)
+            @Html.ValidationMessageFor(model => model.ADDRESS_LINE2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CITY)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CITY)
+            @Html.ValidationMessageFor(model => model.CITY)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.STATE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.STATE)
+            @Html.ValidationMessageFor(model => model.STATE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.COUNTY)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.COUNTY)
+            @Html.ValidationMessageFor(model => model.COUNTY)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.POSTAL_CODE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.POSTAL_CODE)
+            @Html.ValidationMessageFor(model => model.POSTAL_CODE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HOME_PHONE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HOME_PHONE)
+            @Html.ValidationMessageFor(model => model.HOME_PHONE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WORK_PHONE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WORK_PHONE)
+            @Html.ValidationMessageFor(model => model.WORK_PHONE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CELL_PHONE)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CELL_PHONE)
+            @Html.ValidationMessageFor(model => model.CELL_PHONE)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EMAIL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EMAIL)
+            @Html.ValidationMessageFor(model => model.EMAIL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NOTES)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NOTES)
+            @Html.ValidationMessageFor(model => model.NOTES)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BAD_EMAIL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.BAD_EMAIL)
+            @Html.ValidationMessageFor(model => model.BAD_EMAIL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ORG_SEQ)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ORG_SEQ)
+            @Html.ValidationMessageFor(model => model.ORG_SEQ)
+        </div>
+
+        @Html.HiddenFor(model => model.REVIEWER_ID)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
