@@ -202,8 +202,8 @@
     <Compile Include="Models\Organizations.cs" />
     <Compile Include="Models\Questions.cs" />
     <Compile Include="Models\Reviewers.cs" />
+    <Compile Include="Models\ScholarshipCriteria.cs" />
     <Compile Include="Models\ScholarshipModel.cs" />
-    <Compile Include="Models\Scholarships.cs" />
     <Compile Include="Models\StudentFinancialModel.cs" />
     <Compile Include="Models\StudentModel.cs">
       <SubType>Code</SubType>
@@ -401,6 +401,7 @@
     <Content Include="Views\Admin\CreateScholarship.cshtml" />
     <Content Include="Views\Admin\ReviewerInfo.cshtml" />
     <Content Include="Views\Admin\EditReviewer.cshtml" />
+    <Content Include="Views\Admin\ScholarshipCriteria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

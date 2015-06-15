@@ -693,5 +693,17 @@ namespace HillsboroughEducation.Controllers
             return View(criteria);
         }
 
+        //
+        // GET: /Admin/ScholarshipCriteria
+        public ActionResult ScholarshipCriteria(int id = 1)
+        {
+            ScholarshipCriteriaModel scholarshipCriteria = new ScholarshipCriteriaModel();
+
+            scholarshipCriteria.scholarships = dbScholarship.ScholarshipProfiles.Find(id);
+            scholarshipCriteria.criterias = dbCriteria.CriteriaProfiles.ToList();
+
+            return View(scholarshipCriteria);
+        }
+
     }
 }

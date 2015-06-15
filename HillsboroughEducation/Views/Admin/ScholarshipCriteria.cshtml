@@ -1,0 +1,34 @@
+﻿@using HillsboroughEducation.Models;
+@model ScholarshipCriteriaModel
+
+@{
+    ViewBag.Title = "ScholarshipCriteria";
+}
+
+
+
+<h2>ScholarshipCriteria</h2>
+
+<h3>@Html.DisplayFor(model => Model.scholarships.TITLE)</h3>
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Criteria Description", "Criteria", new { sortOrder = ViewBag.DescrSortParam })
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.criterias)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DESCR)
+                </td>
+            </tr>
+        }
+    </table>
+}
