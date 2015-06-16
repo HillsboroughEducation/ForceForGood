@@ -56,6 +56,9 @@
             <td>
                 @Html.ActionLink("Details", "ScholarshipInfo", new { id = item.ID })
             </td>
+            <td>
+                @Html.ActionLink("Add Criteria", "ScholarshipCriteria", new { id = item.ID})
+            </td>
         </tr>
     }
 </table>

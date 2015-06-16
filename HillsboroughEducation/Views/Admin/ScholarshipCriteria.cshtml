@@ -5,30 +5,41 @@
     ViewBag.Title = "ScholarshipCriteria";
 }
 
-
-
 <h2>ScholarshipCriteria</h2>
 
 <h3>@Html.DisplayFor(model => Model.scholarships.TITLE)</h3>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddScholarshipCriteria", "Admin", FormMethod.Post))
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.ActionLink("Criteria Description", "Criteria", new { sortOrder = ViewBag.DescrSortParam })
-            </th>
 
-            <th></th>
-        </tr>
+    @Html.AntiForgeryToken()
 
-        @foreach (var item in Model.criterias)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DESCR)
-                </td>
-            </tr>
-        }
-    </table>
+    <h4>Select Criteria</h4>
+
+    <hr />
+
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+
+        @Html.Label("Select Criteria:", new { @class = "col-md-2 control-label" })
+
+        <div class="col-md-10">
+
+            @Html.DropDownList("Criteria", ViewData["Criteria"] as SelectList, new { @class = "form-control" })
+
+        </div>
+
+    </div><br />
+
+    <div class="form-group">
+
+        <div class="col-md-offset-2 col-md-10">
+
+            <input type="submit" class="btn btn-default" value="Submit" />
+
+        </div>
+
+    </div>
+
 }

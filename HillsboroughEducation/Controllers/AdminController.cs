@@ -19,6 +19,7 @@ namespace HillsboroughEducation.Controllers
         private ReviewerContext dbReviewer = new ReviewerContext();
         private DonorContext dbDonor = new DonorContext();
         private CriteriaContext dbCriteria = new CriteriaContext();
+        private ScholarshipCriteriaContext dbScholarshipCriteria = new ScholarshipCriteriaContext();
 
         //
         // GET: /Admin/Index
@@ -701,6 +702,42 @@ namespace HillsboroughEducation.Controllers
 
             scholarshipCriteria.scholarships = dbScholarship.ScholarshipProfiles.Find(id);
             scholarshipCriteria.criterias = dbCriteria.CriteriaProfiles.ToList();
+
+
+            SelectList Criterias = new SelectList(scholarshipCriteria.criterias.);
+            ViewData["Criteria"] = Criterias;
+            return View(scholarshipCriteria);
+        }
+
+        //
+        // GET:  /Admin/AddScholarshipCriteria
+        public ActionResult AddScholarshipCriteria()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Admin/AddScholarshipCriteria
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddScholarshipCriteria(ScholarshipCriteria scholarshipCriteria)
+        {
+            var errors = GetRealErrors(ModelState);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dbScholarshipCriteria.ScholarshipCriteriaProfiles.Add(scholarshipCriteria);
+                    dbScholarshipCriteria.SaveChanges();
+                    return RedirectToAction("Scholarship", "Admin");
+                }
+            }
+            catch (DataException dex)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                Console.WriteLine("Unable to save changes: " + dex);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
 
             return View(scholarshipCriteria);
         }
