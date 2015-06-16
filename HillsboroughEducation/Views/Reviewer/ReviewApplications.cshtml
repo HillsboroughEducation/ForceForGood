@@ -1,5 +1,30 @@
-﻿@{
+﻿@model HillsboroughEducation.Models.Reviewers
+
+@{
     ViewBag.Title = "ReviewApplications";
 }
 
-<h2>Review Applications</h2>
+<script>
+    $m = jQuery.noConflict();
+</script>
+<script type="text/javascript">
+    $m(document).ready(function () {
+        $m('#tabs').tabs();
+    });
+</script>
+
+<body>
+
+     <h2>Review Applications</h2>
+    <div id="tabs">
+        <ul>
+            <li><a href="#scoringcriteria">Scoring Criteria</a></li>
+            <li>@Html.ActionLink("Financial Info", "StudentFinancialInfo", "Admin", new { id = Model.ID }, "")</li> 
+            <li><a href="#application">Test Scores</a></li>
+            <li><a href="#essay">Essay Questions</a></li>
+            <li><a href="#essay">Letters</a></li>
+            <li><a href="#documents">Documents</a></li>
+        </ul>
+
+        </div>
+    </body>
